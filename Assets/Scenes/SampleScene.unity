@@ -302,6 +302,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 176659584}
+  - component: {fileID: 176659585}
   m_Layer: 0
   m_Name: BluePortal
   m_TagString: Untagged
@@ -327,6 +328,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &176659585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 176659583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1dc5b258ac8725499e464c608ecae78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Camera: {fileID: 742502679}
+  m_OtherPortaktransform: {fileID: 122651678}
+  m_MirrorPortal: {fileID: 1386790147}
+  m_Player: {fileID: 660270060}
 --- !u!1 &654738435
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,6 +374,17 @@ Transform:
   m_Father: {fileID: 1386790146}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &660270060 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2184905985369214331, guid: 126aa4b5831d3b84cae0574e86cc2228, type: 3}
+  m_PrefabInstance: {fileID: 1779116275}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b45748ac2c512643920547dc8fc15d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -948,6 +976,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1386790146}
+  - component: {fileID: 1386790147}
   m_Layer: 0
   m_Name: OrangePortal
   m_TagString: Untagged
@@ -973,6 +1002,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
+--- !u!114 &1386790147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386790145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1dc5b258ac8725499e464c608ecae78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Camera: {fileID: 1245989117}
+  m_OtherPortaktransform: {fileID: 654738436}
+  m_MirrorPortal: {fileID: 176659585}
+  m_Player: {fileID: 660270060}
 --- !u!1001 &1410350241
 PrefabInstance:
   m_ObjectHideFlags: 0
