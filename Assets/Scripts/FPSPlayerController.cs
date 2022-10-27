@@ -217,7 +217,7 @@ public class FPSPlayerController : MonoBehaviour
         //SetShootWeaponAnimation();
         m_Shooting = true;
         StartCoroutine(EndShoot());
-        if(2 > 0)
+       /* if(2 > 0)
         {
             //PlayerAmmo.instance.LoseAmmo();
         }
@@ -239,7 +239,7 @@ public class FPSPlayerController : MonoBehaviour
               //  m_TotalPoints -= 25;
             //}
 
-        }
+        }*/
     }
 
     void CreatShootHitParticle(Collider collider,Vector3 position,Vector3 Normal)
