@@ -12,7 +12,7 @@ public class Portal : MonoBehaviour
 
     public float m_MinValidDistance;
     public float m_MaxValidDistance;
-    public float m_MinDotAngle;
+    public float m_MinDotValidAngle;
 
     private void LateUpdate()
     {
