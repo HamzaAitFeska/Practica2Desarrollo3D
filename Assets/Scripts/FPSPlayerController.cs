@@ -211,17 +211,17 @@ public class FPSPlayerController : MonoBehaviour
     }
     public float m_MaxShootDistance = 50.0f;
     public LayerMask m_ShootingLayerMask;
-    void Shoot(Portal m_portal)
+    void Shoot(Portal _Portal)
     {
         Vector3 l_Position;
         Vector3 l_Normal;
-        if(m_portal.IsValidPosition(m_Camera.transform.position, m_Camera.transform.forward,m_MaxShootDistance,m_ShootingLayerMask,out l_Position,out l_Normal))
+        if(_Portal.IsValidPosition(m_Camera.transform.position, m_Camera.transform.forward,m_MaxShootDistance,m_ShootingLayerMask,out l_Position,out l_Normal))
         {
-            m_portal.gameObject.SetActive(true);
+            _Portal.gameObject.SetActive(true);
         }
         else
         {
-            m_portal.gameObject.SetActive(false);
+            _Portal.gameObject.SetActive(false);
         }
         //AudioController.instance.PlayOneShot(AudioController.instance.weaponShoot);
         //Ray l_Ray = m_Camera.ViewportPointToRay(new Vector3(0.5f, 0.5f));

@@ -31,12 +31,15 @@ public class Portal : MonoBehaviour
     {
         Ray l_Ray = new Ray(StartPosition, forward);
         RaycastHit l_RaycastHit;
-        bool l_Valid = true;
+        bool l_Valid = false;
         Position = Vector3.zero;
         Normal = Vector3.forward;
 
+        Debug.DrawRay(StartPosition, forward * 5.0f, Color.red, 5.0f);
+
         if (Physics.Raycast(l_Ray, out l_RaycastHit, MaxDistance, PortalLayerMask.value))
         {
+            Debug.Log("BB " + l_RaycastHit.collider.name + " - " + l_RaycastHit.collider.tag);
             if (l_RaycastHit.collider.tag == "DrawableWall")
             {
                 l_Valid = true;
@@ -52,16 +55,19 @@ public class Portal : MonoBehaviour
                     l_Ray = new Ray(StartPosition, l_Direction);
                     if (Physics.Raycast(l_Ray, out l_RaycastHit, MaxDistance, PortalLayerMask.value))
                     {
-                        float l_Distance = Vector3.Distance(Position, l_RaycastHit.point);
-                        float l_DotAngle = Vector3.Dot(Normal, l_RaycastHit.normal);
-                        if (!(l_Distance >= m_MinValidDistance && l_Distance <= m_MaxValidDistance && l_DotAngle > m_MinDotValidAngle))
+                        if (l_RaycastHit.collider.tag == "DrawableWall")
                         {
-                            l_Valid = false;
+
+                            float l_Distance = Vector3.Distance(transform.position, l_RaycastHit.point);
+                            float l_DotAngle = Vector3.Dot(Normal, l_RaycastHit.normal);
+                            Debug.Log("rs "+l_Distance+" | "+l_DotAngle);
+                            if (!(l_Distance >= m_MinValidDistance && l_Distance <= m_MaxValidDistance && l_DotAngle > m_MinDotValidAngle))
+                            {
+                                l_Valid = false;
+                            }
                         }
                         else
-                        {
                             l_Valid = false;
-                        }
                     }
                     else
                     {
