@@ -233,6 +233,16 @@ MonoBehaviour:
   m_MirrorPortal: {fileID: 0}
   m_Player: {fileID: 0}
   m_OffsetNearPlayer: 0
+  m_ValidPoints:
+  - {fileID: 7195649537292283301}
+  - {fileID: 7157327209794585292}
+  - {fileID: 5896143369553264443}
+  - {fileID: 5232468446003887657}
+  - {fileID: 8514714499614504967}
+  - {fileID: 3388715454739059122}
+  m_MinValidDistance: 0
+  m_MaxValidDistance: 0
+  m_MinDotValidAngle: 0
 --- !u!1 &6440291643170937872
 GameObject:
   m_ObjectHideFlags: 0

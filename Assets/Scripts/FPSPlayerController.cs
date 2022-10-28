@@ -58,6 +58,9 @@ public class FPSPlayerController : MonoBehaviour
     public bool m_AimLocked = true;
     public bool m_TargetHit = false;
     public int DecalsElements = 15;
+
+    public Portal m_BluePortal;
+    public Portal m_OrangePortal;
     
     void Start()
     {
@@ -70,6 +73,8 @@ public class FPSPlayerController : MonoBehaviour
         m_IsReloading = false;
         m_IsRunning = false;
         instance = this;
+        m_BluePortal.gameObject.SetActive(false);
+        m_OrangePortal.gameObject.SetActive(false);
         //poolDecals = new TcObjectPool1(DecalsElements, PrefabBulletHole);
         //AudioController.instance.Stop(AudioController.instance.TopGmusic);
     }
@@ -184,13 +189,14 @@ public class FPSPlayerController : MonoBehaviour
             m_OnGround = false;
         }
 
-        if(Input.GetMouseButtonDown(0) && CanShhot())
+        if(Input.GetMouseButtonDown(0))
         {
-            Shoot();
+            Shoot(m_BluePortal);
         }
-        else if(Input.GetMouseButtonDown(0)) //PlayerAmmo.instance.currentAmmo == 0 && !m_IsReloading)
+
+        if (Input.GetMouseButtonDown(1))
         {
-            //AudioController.instance.PlayOneShot(AudioController.instance.weaponEmpty);
+            Shoot(m_OrangePortal);
         }
     }
 
@@ -205,18 +211,28 @@ public class FPSPlayerController : MonoBehaviour
     }
     public float m_MaxShootDistance = 50.0f;
     public LayerMask m_ShootingLayerMask;
-    void Shoot()
+    void Shoot(Portal m_portal)
     {
-        //AudioController.instance.PlayOneShot(AudioController.instance.weaponShoot);
-        Ray l_Ray = m_Camera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
-        RaycastHit l_RaycastHit;
-        if(Physics.Raycast(l_Ray, out l_RaycastHit, m_MaxShootDistance, m_ShootingLayerMask))
+        Vector3 l_Position;
+        Vector3 l_Normal;
+        if(m_portal.IsValidPosition(m_Camera.transform.position, m_Camera.transform.forward,m_MaxShootDistance,m_ShootingLayerMask,out l_Position,out l_Normal))
         {
-            CreatShootHitParticle(l_RaycastHit.collider, l_RaycastHit.point, l_RaycastHit.normal);
+            m_portal.gameObject.SetActive(true);
         }
+        else
+        {
+            m_portal.gameObject.SetActive(false);
+        }
+        //AudioController.instance.PlayOneShot(AudioController.instance.weaponShoot);
+        //Ray l_Ray = m_Camera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
+        //RaycastHit l_RaycastHit;
+        //if(Physics.Raycast(l_Ray, out l_RaycastHit, m_MaxShootDistance, m_ShootingLayerMask))
+        //{
+          //  CreatShootHitParticle(l_RaycastHit.collider, l_RaycastHit.point, l_RaycastHit.normal);
+        //}
         //SetShootWeaponAnimation();
-        m_Shooting = true;
-        StartCoroutine(EndShoot());
+        //m_Shooting = true;
+        //StartCoroutine(EndShoot());
        /* if(2 > 0)
         {
             //PlayerAmmo.instance.LoseAmmo();

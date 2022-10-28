@@ -42,6 +42,8 @@ public class Portal : MonoBehaviour
                 l_Valid = true;
                 Normal = l_RaycastHit.normal;
                 Position = l_RaycastHit.point;
+                transform.position = Position;
+                transform.rotation = Quaternion.LookRotation(Normal);
 
                 for (int i = 0; i < m_ValidPoints.Count; i++)
                 {
