@@ -9,7 +9,6 @@ public class Portal : MonoBehaviour
     public FPSPlayerController m_Player;
     public float m_OffsetNearPlayer;
     public List<Transform> m_ValidPoints;
-
     public float m_MinValidDistance;
     public float m_MaxValidDistance;
     public float m_MinDotValidAngle;

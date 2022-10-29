@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class FPSPlayerController : MonoBehaviour
 {
     float m_Yaw;
@@ -52,13 +53,17 @@ public class FPSPlayerController : MonoBehaviour
     //public TcObjectPool1 poolDecals;
     float m_VerticalSpeed = 0.0f;
     public bool m_OnGround = true; //REMOVE PUBLIC AFTER FIXED
-
     public float m_JumpSpeed = 10.0f;
     public bool m_AngleLocked = false;
     public bool m_AimLocked = true;
     public bool m_TargetHit = false;
     public int DecalsElements = 15;
-
+    [Header("Crosshairs")]
+    public RawImage CrosshairEmpty;
+    public RawImage CrosshairBlue;
+    public RawImage CrossHairOrange;
+    public RawImage CrossHairFull;
+    [Header("Portals")]
     public Portal m_BluePortal;
     public Portal m_OrangePortal;
     
@@ -75,6 +80,9 @@ public class FPSPlayerController : MonoBehaviour
         instance = this;
         m_BluePortal.gameObject.SetActive(false);
         m_OrangePortal.gameObject.SetActive(false);
+        CrosshairBlue.gameObject.SetActive(false);
+        CrossHairOrange.gameObject.SetActive(false);
+        CrossHairFull.gameObject.SetActive(false);
         //poolDecals = new TcObjectPool1(DecalsElements, PrefabBulletHole);
         //AudioController.instance.Stop(AudioController.instance.TopGmusic);
     }
@@ -198,6 +206,9 @@ public class FPSPlayerController : MonoBehaviour
         {
             Shoot(m_OrangePortal);
         }
+
+        CrosshairPortals();
+
     }
 
     public IEnumerator EndShoot()
@@ -310,6 +321,41 @@ public class FPSPlayerController : MonoBehaviour
         if (other.CompareTag("DeadZone"))
         {
             //PlayerLife.instance.currentLife = 0;
+        }
+    }
+
+    private void CrosshairPortals()
+    {
+        if (m_BluePortal.gameObject.activeInHierarchy && m_OrangePortal.gameObject.activeInHierarchy)
+        {
+            CrossHairFull.gameObject.SetActive(true);
+            CrosshairBlue.gameObject.SetActive(false);
+            CrossHairOrange.gameObject.SetActive(false);
+            CrosshairEmpty.gameObject.SetActive(false);
+        }
+
+        if (m_BluePortal.gameObject.activeInHierarchy && !m_OrangePortal.gameObject.activeInHierarchy)
+        {
+            CrosshairBlue.gameObject.SetActive(true);
+            CrosshairEmpty.gameObject.SetActive(false);
+            CrossHairOrange.gameObject.SetActive(false);
+            CrossHairFull.gameObject.SetActive(false);
+        }
+
+        if (!m_BluePortal.gameObject.activeInHierarchy && !m_OrangePortal.gameObject.activeInHierarchy)
+        {
+            CrosshairEmpty.gameObject.SetActive(true);
+            CrossHairFull.gameObject.SetActive(false);
+            CrosshairBlue.gameObject.SetActive(false);
+            CrossHairOrange.gameObject.SetActive(false);
+        }
+
+        if (!m_BluePortal.gameObject.activeInHierarchy && m_OrangePortal.gameObject.activeInHierarchy)
+        {
+            CrossHairOrange.gameObject.SetActive(true);
+            CrosshairEmpty.gameObject.SetActive(false);
+            CrosshairBlue.gameObject.SetActive(false);
+            CrossHairFull.gameObject.SetActive(false);
         }
     }
 }
