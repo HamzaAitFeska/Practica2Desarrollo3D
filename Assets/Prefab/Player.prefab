@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2184905983682978673}
   - component: {fileID: 2184905983682978676}
   - component: {fileID: 2184905983682978675}
-  - component: {fileID: 2184905983682978674}
   m_Layer: 8
   m_Name: Renderable
   m_TagString: Untagged
@@ -82,19 +81,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2184905983682978674
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2184905983682978672}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0.023553036, y: 0, z: 0}
 --- !u!1 &2184905983836550286
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,7 +313,8 @@ GameObject:
   - component: {fileID: 2184905985369214332}
   - component: {fileID: 2184905985369214331}
   - component: {fileID: 2184905985369214330}
-  - component: {fileID: 2184905985369214214}
+  - component: {fileID: 675303587461599310}
+  - component: {fileID: 9047284927211853120}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -397,6 +384,10 @@ MonoBehaviour:
   m_AimLocked: 1
   m_TargetHit: 0
   DecalsElements: 15
+  CrosshairEmpty: {fileID: 0}
+  CrosshairBlue: {fileID: 0}
+  CrossHairOrange: {fileID: 0}
+  CrossHairFull: {fileID: 0}
   m_BluePortal: {fileID: 0}
   m_OrangePortal: {fileID: 0}
   m_MaxShootDistance: 50
@@ -421,7 +412,27 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.9, z: 0}
---- !u!65 &2184905985369214214
+--- !u!114 &675303587461599310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2184905985369214213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87d4adcd22bf02b49ad4f5aa8f438548, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagePlayer: 0
+  CheckpointPosition: {x: 0, y: 0, z: 0}
+  CheckpointRotation: {x: 0, y: 0, z: 0, w: 0}
+  m_IsDead: 0
+  m_PlayedOnce: 0
+  m_IsCreated: 0
+  GameOver: {fileID: 0}
+  UI: {fileID: 0}
+--- !u!65 &9047284927211853120
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -432,8 +443,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 2.5, z: 1.5}
-  m_Center: {x: 0.02, y: 1, z: 0}
+  m_Size: {x: 1, y: 3, z: 0.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &3090867466888531775
 PrefabInstance:
   m_ObjectHideFlags: 0

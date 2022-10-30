@@ -313,14 +313,14 @@ public class FPSPlayerController : MonoBehaviour
     }*/
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("DeathTrapTrigger"))
-        {
+        //if (other.CompareTag("DeathTrapTrigger"))
+        //{
             //PlayerLife.instance.currentLife = 0;
-        }
+        //}
 
         if (other.CompareTag("DeadZone"))
         {
-            //PlayerLife.instance.currentLife = 0;
+            PlayerLife.instance.currentLife = 0;
         }
     }
 

@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - DrawableWall
+  - DeadZone
   layers:
   - Default
   - TransparentFX
