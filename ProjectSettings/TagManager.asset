@@ -6,6 +6,7 @@ TagManager:
   tags:
   - DrawableWall
   - DeadZone
+  - Portal
   layers:
   - Default
   - TransparentFX

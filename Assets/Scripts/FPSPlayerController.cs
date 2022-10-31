@@ -66,6 +66,7 @@ public class FPSPlayerController : MonoBehaviour
     [Header("Portals")]
     public Portal m_BluePortal;
     public Portal m_OrangePortal;
+    public GameObject Offset;
     
     void Start()
     {
@@ -322,6 +323,12 @@ public class FPSPlayerController : MonoBehaviour
         {
             PlayerLife.instance.currentLife = 0;
         }
+
+        if (other.CompareTag("Portal"))
+        {
+            Teleport(m_BluePortal);
+            Debug.Log("IN");
+        }
     }
 
     private void CrosshairPortals()
@@ -357,5 +364,16 @@ public class FPSPlayerController : MonoBehaviour
             CrosshairBlue.gameObject.SetActive(false);
             CrossHairFull.gameObject.SetActive(false);
         }
+    }
+
+    private void Teleport(Portal _portal)
+    {
+        Vector3 l_Position = _portal.m_OtherPortalTransform.transform.InverseTransformPoint(transform.position);
+        Vector3 l_Direction = _portal.m_OtherPortalTransform.InverseTransformDirection(-transform.forward);
+
+        PlayerLife.instance.transform.position = _portal.m_MirrorPortal.transform.TransformPoint(l_Position);
+        PlayerLife.instance.transform.forward = _portal.m_MirrorPortal.transform.TransformDirection(l_Direction);
+        transform.position = Vector3.MoveTowards(transform.position, Offset.transform.position,1);
+        
     }
 }
