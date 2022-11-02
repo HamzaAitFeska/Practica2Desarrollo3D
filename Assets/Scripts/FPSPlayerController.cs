@@ -323,11 +323,11 @@ public class FPSPlayerController : MonoBehaviour
             PlayerLife.instance.currentLife = 0;
         }
 
-        /*if (other.CompareTag("Portal"))
+        if (other.CompareTag("Portal"))
         {
             Teleport(m_BluePortal);
             Debug.Log("IN");
-        }*/
+        }
     }
 
     private void CrosshairPortals()
@@ -365,5 +365,16 @@ public class FPSPlayerController : MonoBehaviour
         }
     }
 
-    
+    public void Teleport(Portal _Portal)
+    {
+        Vector3 l_Position = _Portal.m_OtherPortalTransform.InverseTransformPoint(transform.position);
+        Vector3 l_Direction = _Portal.m_OtherPortalTransform.InverseTransformDirection(-transform.forward);
+
+        transform.position = _Portal.m_MirrorPortal.transform.TransformPoint(l_Position);
+        transform.forward = _Portal.m_MirrorPortal.transform.TransformDirection(l_Direction);
+        //transform.position = Vector3.MoveTowards(PlayerLife.instance.transform.position, Offset.transform.position, 1);
+
+    }
+
+
 }

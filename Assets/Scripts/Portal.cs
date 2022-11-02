@@ -82,21 +82,13 @@ public class Portal : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            Teleport();
-        }
-    }
-
     public void Teleport()
     {
-        Vector3 l_Position = m_OtherPortalTransform.transform.InverseTransformPoint(transform.position);
-        Vector3 l_Direction = m_OtherPortalTransform.InverseTransformDirection(-transform.forward);
+        Vector3 l_Position = m_OtherPortalTransform.InverseTransformPoint(m_Player.transform.position);
+        Vector3 l_Direction = m_OtherPortalTransform.InverseTransformDirection(-m_Player.transform.forward);
 
-        PlayerLife.instance.transform.position = m_MirrorPortal.transform.TransformPoint(l_Position);
-        PlayerLife.instance.transform.forward = m_MirrorPortal.transform.TransformDirection(l_Direction);
+        m_Player.transform.position = m_MirrorPortal.transform.TransformPoint(l_Position);
+        m_Player.transform.forward = m_MirrorPortal.transform.TransformDirection(l_Direction);
         //PlayerLife.instance.transform.position = Vector3.MoveTowards(PlayerLife.instance.transform.position, Offset.transform.position, 1);
 
     }
