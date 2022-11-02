@@ -66,6 +66,7 @@ public class FPSPlayerController : MonoBehaviour
     [Header("Portals")]
     public Portal m_BluePortal;
     public Portal m_OrangePortal;
+    public GameObject OrangeTexturee;
         
     void Start()
     {
@@ -78,6 +79,7 @@ public class FPSPlayerController : MonoBehaviour
         m_IsReloading = false;
         m_IsRunning = false;
         instance = this;
+        OrangeTexturee.SetActive(false);
         m_BluePortal.gameObject.SetActive(false);
         m_OrangePortal.gameObject.SetActive(false);
         CrosshairBlue.gameObject.SetActive(false);
@@ -197,14 +199,26 @@ public class FPSPlayerController : MonoBehaviour
             m_OnGround = false;
         }
 
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonUp(0))
         {
             Shoot(m_BluePortal);
+            OrangeTexturee.SetActive(false);
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonUp(1))
         {
             Shoot(m_OrangePortal);
+            OrangeTexturee.SetActive(false);
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            CheckOrange();
+        }
+
+        if (Input.GetMouseButton(1))
+        {
+            CheckOrange();
         }
 
         CrosshairPortals();
@@ -271,7 +285,7 @@ public class FPSPlayerController : MonoBehaviour
 
     void CreatShootHitParticle(Collider collider,Vector3 position,Vector3 Normal)
     {
-        GameObject l_Decal; //poolDecals.GetNextElemnt();
+        //poolDecals.GetNextElemnt();
         //_Decal.SetActive(true);
         //l_Decal.transform.position = position;
         //l_Decal.transform.rotation = Quaternion.LookRotation(Normal);
@@ -376,5 +390,42 @@ public class FPSPlayerController : MonoBehaviour
 
     }
 
+    public bool OrangeTexture(Vector3 StartPosition, Vector3 forward, float MaxDistance, LayerMask PortalLayerMask, out Vector3 Position, out Vector3 Normal)
+    {
+        Ray l_Ray = new Ray(StartPosition, forward);
+        RaycastHit l_RaycastHit;
+        bool l_Valid = false;
+        Position = Vector3.zero;
+        Normal = Vector3.forward;
+
+        if(Physics.Raycast(l_Ray, out l_RaycastHit, MaxDistance, PortalLayerMask.value))
+        {
+            if(l_RaycastHit.collider.tag == "DrawableWall")
+            {
+               
+                l_Valid = true;
+                Normal = l_RaycastHit.normal;
+                Position = l_RaycastHit.point;
+                OrangeTexturee.transform.position = Position;
+                OrangeTexturee.transform.rotation = Quaternion.LookRotation(Normal);
+            }
+        }
+
+        return l_Valid;
+    }
+
+    void CheckOrange()
+    {
+        Vector3 l_Position;
+        Vector3 l_Normal;
+        if(OrangeTexture(m_Camera.transform.position, m_Camera.transform.forward, m_MaxShootDistance, m_ShootingLayerMask, out l_Position, out l_Normal))
+        {
+            OrangeTexturee.SetActive(true);
+        }
+        else
+        {
+            OrangeTexturee.SetActive(false);
+        }
+    }
 
 }
