@@ -65,7 +65,7 @@ public class FPSPlayerController : MonoBehaviour
     public float m_AttachingObjectSpeed = 20f;
     public float m_MaxDistanceAttachObject = 10.0f;
     public LayerMask m_AttachObjectMask;
-    public float m_ThrowAttachedObject = 100f;
+    public float m_ThrowAttachedObjectForce = 100f;
     public Vector3 m_Direction = Vector3.zero;
     [Header("Crosshairs")]
     public RawImage CrosshairEmpty;
@@ -210,27 +210,7 @@ public class FPSPlayerController : MonoBehaviour
             m_OnGround = false;
         }
 
-        if(Input.GetMouseButtonUp(0))
-        {
-            Shoot(m_BluePortal);
-            OrangeTexturee.SetActive(false);
-        }
-
-        if (Input.GetMouseButtonUp(1))
-        {
-            Shoot(m_OrangePortal);
-            OrangeTexturee.SetActive(false);
-        }
-
-        if (Input.GetMouseButton(0))
-        {
-            CheckOrange();
-        }
-
-        if (Input.GetMouseButton(1))
-        {
-            CheckOrange();
-        }
+        
 
         if(Input.GetKeyDown(KeyCode.E) && CanAttachObject())
         {
@@ -248,7 +228,7 @@ public class FPSPlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.A))
             {
-                ThrowAttachedObject(m_ThrowAttachedObject);
+                ThrowAttachedObject(m_ThrowAttachedObjectForce);
             }
             if (Input.GetMouseButtonDown(1))
             {
@@ -258,7 +238,27 @@ public class FPSPlayerController : MonoBehaviour
         }
         else if(!m_AttachingObject)
         {
+            if (Input.GetMouseButtonUp(0))
+            {
+                Shoot(m_BluePortal);
+                OrangeTexturee.SetActive(false);
+            }
 
+            if (Input.GetMouseButtonUp(1))
+            {
+                Shoot(m_OrangePortal);
+                OrangeTexturee.SetActive(false);
+            }
+
+            if (Input.GetMouseButton(0))
+            {
+                CheckOrange();
+            }
+
+            if (Input.GetMouseButton(1))
+            {
+                CheckOrange();
+            }
         }
 
     }

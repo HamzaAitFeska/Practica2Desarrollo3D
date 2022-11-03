@@ -6,7 +6,7 @@ public class Bouncing : MonoBehaviour
 {
     // Start is called before the first frame update
     public Rigidbody rb;
-    public float jumpAmount = 10f;
+    public float jumpAmount = 100f;
 
     private void Start()
     {
@@ -14,10 +14,10 @@ public class Bouncing : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-          
-        if (other.CompareTag("Player"))
+        if(other.tag == "Cube")
         {
             rb.AddForce(transform.up * jumpAmount, ForceMode.Impulse);
+            Debug.Log("IM IN");
         }
     }
 }
