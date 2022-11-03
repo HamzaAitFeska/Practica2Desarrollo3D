@@ -62,9 +62,10 @@ public class FPSPlayerController : MonoBehaviour
     Rigidbody m_ObjectAttached;
     bool m_AttachingObject = false;
     Quaternion m_AttachingObjectStartRotation;
-    public float m_AttachingObjectSpeed = 5f;
+    public float m_AttachingObjectSpeed = 20f;
     public float m_MaxDistanceAttachObject = 10.0f;
     public LayerMask m_AttachObjectMask;
+    public float m_ThrowAttachedObject = 100f;
     public Vector3 m_Direction = Vector3.zero;
     [Header("Crosshairs")]
     public RawImage CrosshairEmpty;
@@ -243,6 +244,23 @@ public class FPSPlayerController : MonoBehaviour
             UpdateAttachObject();
         }
 
+        if (m_ObjectAttached && !m_AttachingObject)
+        {
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                ThrowAttachedObject(m_ThrowAttachedObject);
+            }
+            if (Input.GetMouseButtonDown(1))
+            {
+                ThrowAttachedObject(0.0f);
+            }
+
+        }
+        else if(!m_AttachingObject)
+        {
+
+        }
+
     }
 
     bool CanAttachObject()
@@ -260,6 +278,7 @@ public class FPSPlayerController : MonoBehaviour
             {
                 m_AttachingObject = true;
                 m_ObjectAttached = l_raycastHit.collider.GetComponent<Rigidbody>();
+                m_ObjectAttached.GetComponent<Companion>().SetAttached(true);
                 m_ObjectAttached.isKinematic = true;
                 m_AttachingObjectStartRotation = l_raycastHit.collider.transform.rotation;
                
@@ -268,7 +287,17 @@ public class FPSPlayerController : MonoBehaviour
 
         }
     }
-
+    void ThrowAttachedObject(float force)
+    {
+        if(m_ObjectAttached != null)
+        {
+            m_ObjectAttached.transform.SetParent(null);
+            m_ObjectAttached.isKinematic = false;
+            m_ObjectAttached.AddForce(m_PitchCotroller.forward * force);
+            m_ObjectAttached.GetComponent<Companion>().SetAttached(false);
+            m_ObjectAttached = null;
+        }
+    }
     void UpdateAttachObject() 
     {
         Vector3 l_EulerAngles = m_AttachingPosition.rotation.eulerAngles;
@@ -279,7 +308,7 @@ public class FPSPlayerController : MonoBehaviour
         if (l_Movement >= l_Distance)
         {
             m_AttachingObject = false;
-            m_ObjectAttached.transform.SetParent(m_AttachingPosition);
+             m_ObjectAttached.transform.SetParent(m_AttachingPosition);
             m_ObjectAttached.transform.localPosition = Vector3.zero;
             m_ObjectAttached.transform.localRotation = Quaternion.identity;
             m_ObjectAttached.MovePosition(m_AttachingPosition.position);
@@ -410,7 +439,7 @@ public class FPSPlayerController : MonoBehaviour
         if (other.CompareTag("Portal"))
         {
             Portal l_Portal = other.GetComponent<Portal>();
-            if(Vector3.Dot(-m_Direction, l_Portal.transform.forward) > (Mathf.Cos(m_AngleTransformPortal) * Mathf.Deg2Rad))
+            if(Vector3.Dot(l_Portal.transform.forward, -m_Direction) > Mathf.Cos(m_AngleTransformPortal * Mathf.Deg2Rad))
             {
               Teleport(l_Portal);
             }
