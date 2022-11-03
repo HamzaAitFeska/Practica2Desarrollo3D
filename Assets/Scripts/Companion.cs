@@ -6,13 +6,15 @@ public class Companion : MonoBehaviour
 {
     // Start is called before the first frame update
     bool m_IsAttached = false;
-    Rigidbody m_Rigidbody;
+    [SerializeField]public Rigidbody m_Rigidbody;
     public float m_OffsetPortal = 1.5f;
     Portal m_ExitPortal = null;
+    public static Companion instance;
 
     private void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
+        instance = this;
     }
     public void SetAttached(bool Attached)
     {

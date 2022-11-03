@@ -261,6 +261,15 @@ public class FPSPlayerController : MonoBehaviour
             }
         }
 
+        if(Input.GetAxis("Mouse ScrollWheel") > 0f)
+        {
+            OrangeTexturee.transform.localScale += new Vector3(0.25f,0.5f,0);
+        }
+        else if(Input.GetAxis("Mouse ScrollWheel") < 0f)
+        {
+            OrangeTexturee.transform.localScale -= new Vector3(0.25f,0.5f,0);
+        }
+
     }
 
     bool CanAttachObject()

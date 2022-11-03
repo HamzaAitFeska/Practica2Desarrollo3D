@@ -47,6 +47,7 @@ public class Portal : MonoBehaviour
                 Position = l_RaycastHit.point;
                 transform.position = Position;
                 transform.rotation = Quaternion.LookRotation(Normal);
+                transform.localScale = FPSPlayerController.instance.OrangeTexturee.transform.localScale;
 
                 for (int i = 0; i < m_ValidPoints.Count; i++)
                 {

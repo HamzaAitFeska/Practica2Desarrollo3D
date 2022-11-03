@@ -272,10 +272,9 @@ MonoBehaviour:
   - {fileID: 5232468446003887657}
   - {fileID: 8514714499614504967}
   - {fileID: 3388715454739059122}
-  m_MinValidDistance: 0.4
-  m_MaxValidDistance: 1.2
+  m_MinValidDistance: 0.3
+  m_MaxValidDistance: 1.6
   m_MinDotValidAngle: 0.995
-  Offset: {fileID: 3377799431045741728}
 --- !u!65 &2323538505848568598
 BoxCollider:
   m_ObjectHideFlags: 0

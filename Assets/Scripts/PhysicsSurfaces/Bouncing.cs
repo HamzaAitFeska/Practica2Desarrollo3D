@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bouncing : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Rigidbody rb;
+    
     public float jumpAmount = 100f;
 
     private void Start()
@@ -14,10 +14,9 @@ public class Bouncing : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Cube")
+        if(other.tag == "CompanionCube")
         {
-            rb.AddForce(transform.up * jumpAmount, ForceMode.Impulse);
-            Debug.Log("IM IN");
+            Companion.instance.m_Rigidbody.AddForce(transform.forward * jumpAmount, ForceMode.Impulse);
         }
     }
 }
