@@ -58,6 +58,14 @@ public class FPSPlayerController : MonoBehaviour
     public bool m_AimLocked = true;
     public bool m_TargetHit = false;
     public int DecalsElements = 15;
+    public Transform m_AttachingPosition;
+    Rigidbody m_ObjectAttached;
+    bool m_AttachingObject = false;
+    Quaternion m_AttachingObjectStartRotation;
+    public float m_AttachingObjectSpeed = 5f;
+    public float m_MaxDistanceAttachObject = 10.0f;
+    public LayerMask m_AttachObjectMask;
+    public Vector3 m_Direction = Vector3.zero;
     [Header("Crosshairs")]
     public RawImage CrosshairEmpty;
     public RawImage CrosshairBlue;
@@ -67,6 +75,8 @@ public class FPSPlayerController : MonoBehaviour
     public Portal m_BluePortal;
     public Portal m_OrangePortal;
     public GameObject OrangeTexturee;
+    public float m_OffsetPortal = 0.5f;
+    [Range(0.0f , 90.0f)] public float m_AngleTransformPortal; 
         
     void Start()
     {
@@ -113,24 +123,24 @@ public class FPSPlayerController : MonoBehaviour
         //Movement
         Vector3 l_RightDirection = transform.right;
         Vector3 l_ForwardDirection = transform.forward;
-        Vector3 l_Direction = Vector3.zero;
+        m_Direction = Vector3.zero;
         float l_Speed = m_PlayerSpeed;
         float l_FOV = m_NormalMovementFOV;
         float FOV_Speed = 0.3f;
         
         if (Input.GetKey(m_UpKeyCode))
-            l_Direction = l_ForwardDirection;
+            m_Direction = l_ForwardDirection;
         if (Input.GetKey(m_DownKeyCode))
-            l_Direction = -l_ForwardDirection;
+            m_Direction = -l_ForwardDirection;
         if (Input.GetKey(m_RightKeyCode))
-            l_Direction += l_RightDirection;
+            m_Direction += l_RightDirection;
         if (Input.GetKey(m_LeftKeyCode))
-            l_Direction -= l_RightDirection;
+            m_Direction -= l_RightDirection;
         //Jump if SpaceBar is pressed down and player is on ground
         if (Input.GetKeyDown(m_JumpKeyCode) && m_AirTime < 0.1f)
             m_VerticalSpeed = m_JumpSpeed; 
         //Run if shift is pressed
-        if (Input.GetKey(m_RunKeyCode) && l_Direction != Vector3.zero & !m_IsReloading)
+        if (Input.GetKey(m_RunKeyCode) && m_Direction != Vector3.zero & !m_IsReloading)
         {
             l_Speed = m_PlayerSpeed * m_FastSpeedMultiplier;
             l_FOV = m_RunMovementFOV;
@@ -144,7 +154,7 @@ public class FPSPlayerController : MonoBehaviour
             m_IsRunning = false;
         }
 
-        if(l_Direction != Vector3.zero)
+        if(m_Direction != Vector3.zero)
         {
             m_PlayerIsMoving = true;
         }
@@ -157,9 +167,9 @@ public class FPSPlayerController : MonoBehaviour
 
         
         m_Camera.fieldOfView = Mathf.Lerp(m_Camera.fieldOfView, l_FOV, FOV_Speed);
-        l_Direction.Normalize();
+        m_Direction.Normalize();
 
-        Vector3 l_Movement = l_Direction * l_Speed * Time.deltaTime;
+        Vector3 l_Movement = m_Direction * l_Speed * Time.deltaTime;
         
         //Rotation
         float l_MouseX = Input.GetAxis("Mouse X");
@@ -221,7 +231,67 @@ public class FPSPlayerController : MonoBehaviour
             CheckOrange();
         }
 
+        if(Input.GetKeyDown(KeyCode.E) && CanAttachObject())
+        {
+            AttachObject();
+        }
+
         CrosshairPortals();
+
+        if (m_AttachingObject)
+        {
+            UpdateAttachObject();
+        }
+
+    }
+
+    bool CanAttachObject()
+    {
+        return m_ObjectAttached == null;
+    }
+
+    void AttachObject()
+    {
+        Ray l_Ray = m_Camera.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
+        RaycastHit l_raycastHit;
+        if(Physics.Raycast(l_Ray, out l_raycastHit, m_MaxDistanceAttachObject, m_AttachObjectMask.value))
+        {
+            if (l_raycastHit.collider.tag=="CompanionCube")
+            {
+                m_AttachingObject = true;
+                m_ObjectAttached = l_raycastHit.collider.GetComponent<Rigidbody>();
+                m_ObjectAttached.isKinematic = true;
+                m_AttachingObjectStartRotation = l_raycastHit.collider.transform.rotation;
+               
+            }
+            
+
+        }
+    }
+
+    void UpdateAttachObject() 
+    {
+        Vector3 l_EulerAngles = m_AttachingPosition.rotation.eulerAngles;
+        Vector3 l_Direction = m_AttachingPosition.transform.position - m_ObjectAttached.transform.position;
+        float l_Distance = l_Direction.magnitude;
+        float l_Movement = m_AttachingObjectSpeed * Time.deltaTime;
+
+        if (l_Movement >= l_Distance)
+        {
+            m_AttachingObject = false;
+            m_ObjectAttached.transform.SetParent(m_AttachingPosition);
+            m_ObjectAttached.transform.localPosition = Vector3.zero;
+            m_ObjectAttached.transform.localRotation = Quaternion.identity;
+            m_ObjectAttached.MovePosition(m_AttachingPosition.position);
+            m_ObjectAttached.MoveRotation(Quaternion.Euler(0.0f, l_EulerAngles.y, l_EulerAngles.z));
+        }
+        else
+        {
+            l_Direction /= l_Distance;
+            m_ObjectAttached.MovePosition(m_ObjectAttached.transform.position + l_Direction * l_Movement);
+            m_ObjectAttached.MoveRotation(Quaternion.Lerp(m_AttachingObjectStartRotation, Quaternion.Euler(0.0f, l_EulerAngles.y, l_EulerAngles.z), 1.0f - Mathf.Min(l_Distance / 1.5f, 1.0f)));
+        }
+
 
     }
 
@@ -339,7 +409,11 @@ public class FPSPlayerController : MonoBehaviour
 
         if (other.CompareTag("Portal"))
         {
-            Teleport(m_BluePortal);
+            Portal l_Portal = other.GetComponent<Portal>();
+            if(Vector3.Dot(-m_Direction, l_Portal.transform.forward) > (Mathf.Cos(m_AngleTransformPortal) * Mathf.Deg2Rad))
+            {
+              Teleport(l_Portal);
+            }
             Debug.Log("IN");
         }
     }
@@ -382,10 +456,14 @@ public class FPSPlayerController : MonoBehaviour
     public void Teleport(Portal _Portal)
     {
         Vector3 l_Position = _Portal.m_OtherPortalTransform.InverseTransformPoint(transform.position);
-        Vector3 l_Direction = _Portal.m_OtherPortalTransform.InverseTransformDirection(-transform.forward);
-
-        transform.position = _Portal.m_MirrorPortal.transform.TransformPoint(l_Position);
+        Vector3 l_Direction = _Portal.m_OtherPortalTransform.InverseTransformDirection(transform.forward);
+        Vector3 l_LocalDirectionMovement = _Portal.m_OtherPortalTransform.InverseTransformDirection(m_Direction);
+        Vector3 l_WorldDirectionMovement = _Portal.m_MirrorPortal.transform.TransformDirection(l_LocalDirectionMovement);
+        m_characterController.enabled = false;
         transform.forward = _Portal.m_MirrorPortal.transform.TransformDirection(l_Direction);
+        m_Yaw = transform.rotation.eulerAngles.y;
+        transform.position = _Portal.m_MirrorPortal.transform.TransformPoint(l_Position) + l_WorldDirectionMovement * m_OffsetPortal;
+        m_characterController.enabled = true;
         //transform.position = Vector3.MoveTowards(PlayerLife.instance.transform.position, Offset.transform.position, 1);
 
     }

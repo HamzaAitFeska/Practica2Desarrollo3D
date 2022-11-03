@@ -2116,7 +2116,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!65 &1322334841
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2187,7 +2187,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1322334839}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -27.39, y: 7.11, z: 0.77}
+  m_LocalPosition: {x: -26.18, y: 7.11, z: 3.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2704,6 +2704,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1298057216}
     - target: {fileID: 2184905985369214331, guid: 126aa4b5831d3b84cae0574e86cc2228, type: 3}
+      propertyPath: m_OffsetPortal
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2184905985369214331, guid: 126aa4b5831d3b84cae0574e86cc2228, type: 3}
       propertyPath: m_OrangePortal
       value: 
       objectReference: {fileID: 454641967}
@@ -2730,6 +2734,10 @@ PrefabInstance:
     - target: {fileID: 2184905985369214331, guid: 126aa4b5831d3b84cae0574e86cc2228, type: 3}
       propertyPath: m_FastSpeedMultiplier
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2184905985369214331, guid: 126aa4b5831d3b84cae0574e86cc2228, type: 3}
+      propertyPath: m_AngleTransformPortal
+      value: 58.4
       objectReference: {fileID: 0}
     - target: {fileID: 2184905985369214331, guid: 126aa4b5831d3b84cae0574e86cc2228, type: 3}
       propertyPath: m_PitchRotationalSpeed

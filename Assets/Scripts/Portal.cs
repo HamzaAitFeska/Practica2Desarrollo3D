@@ -12,7 +12,7 @@ public class Portal : MonoBehaviour
     public float m_MinValidDistance;
     public float m_MaxValidDistance;
     public float m_MinDotValidAngle;
-    public GameObject Offset;
+    //public GameObject Offset;
 
     private void LateUpdate()
     {
@@ -82,14 +82,5 @@ public class Portal : MonoBehaviour
     }
 
 
-    public void Teleport()
-    {
-        Vector3 l_Position = m_OtherPortalTransform.InverseTransformPoint(m_Player.transform.position);
-        Vector3 l_Direction = m_OtherPortalTransform.InverseTransformDirection(-m_Player.transform.forward);
-
-        m_Player.transform.position = m_MirrorPortal.transform.TransformPoint(l_Position);
-        m_Player.transform.forward = m_MirrorPortal.transform.TransformDirection(l_Direction);
-        //PlayerLife.instance.transform.position = Vector3.MoveTowards(PlayerLife.instance.transform.position, Offset.transform.position, 1);
-
-    }
+   
 }
