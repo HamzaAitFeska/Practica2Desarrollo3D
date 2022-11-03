@@ -57,6 +57,10 @@ public class Companion : MonoBehaviour
         m_Rigidbody.isKinematic = false;
         transform.localScale = (_Portal.m_MirrorPortal.transform.localScale.x / _Portal.transform.localScale.x)* Vector3.one;
         m_Rigidbody.velocity = l_WorldVelocity;
+        if(m_Rigidbody.velocity == Vector3.zero)
+        {
+            m_Rigidbody.velocity = transform.position + l_WorldVelocity * m_OffsetPortal;
+        }
         m_ExitPortal = _Portal.m_MirrorPortal;
     }
 }
