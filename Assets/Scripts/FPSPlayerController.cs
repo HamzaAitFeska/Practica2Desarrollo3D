@@ -67,6 +67,8 @@ public class FPSPlayerController : MonoBehaviour
     public LayerMask m_AttachObjectMask;
     public float m_ThrowAttachedObjectForce = 100f;
     public Vector3 m_Direction = Vector3.zero;
+    //public Vector3 min = new(0.75f, 0.5f, 1);
+    //public Vector3 max = new(1.25f, 1.5f, 1);
     [Header("Crosshairs")]
     public RawImage CrosshairEmpty;
     public RawImage CrosshairBlue;
@@ -261,13 +263,15 @@ public class FPSPlayerController : MonoBehaviour
             }
         }
 
-        if(Input.GetAxis("Mouse ScrollWheel") > 0f)
+        if(Input.GetAxis("Mouse ScrollWheel") > 0f && OrangeTexturee.transform.localScale.x < 1.25f)
         {
             OrangeTexturee.transform.localScale += new Vector3(0.25f,0.5f,0);
+            
         }
-        else if(Input.GetAxis("Mouse ScrollWheel") < 0f)
+        else if(Input.GetAxis("Mouse ScrollWheel") < 0f && OrangeTexturee.transform.localScale.x > 0.75f)
         {
             OrangeTexturee.transform.localScale -= new Vector3(0.25f,0.5f,0);
+            
         }
 
     }
