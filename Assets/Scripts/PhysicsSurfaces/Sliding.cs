@@ -10,7 +10,7 @@ public class Sliding : MonoBehaviour
         if(collision.collider.tag == "CompanionCube")
         {
             Companion.instance.m_Rigidbody.AddForce(-transform.right * 10, ForceMode.Impulse);
-            Debug.Log("IMIN");
+            
         }
     
     }

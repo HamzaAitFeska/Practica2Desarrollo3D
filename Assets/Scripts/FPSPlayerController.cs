@@ -232,7 +232,7 @@ public class FPSPlayerController : MonoBehaviour
             {
                 ThrowAttachedObject(m_ThrowAttachedObjectForce);
             }
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetKeyDown(KeyCode.B))
             {
                 ThrowAttachedObject(0.0f);
             }
@@ -506,8 +506,7 @@ public class FPSPlayerController : MonoBehaviour
         m_Yaw = transform.rotation.eulerAngles.y;
         transform.position = _Portal.m_MirrorPortal.transform.TransformPoint(l_Position) + l_WorldDirectionMovement * m_OffsetPortal;
         m_characterController.enabled = true;
-        //transform.position = Vector3.MoveTowards(PlayerLife.instance.transform.position, Offset.transform.position, 1);
-
+        
     }
 
     public bool OrangeTexture(Vector3 StartPosition, Vector3 forward, float MaxDistance, LayerMask PortalLayerMask, out Vector3 Position, out Vector3 Normal)

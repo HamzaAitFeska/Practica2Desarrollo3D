@@ -12,9 +12,10 @@ public class Bouncing : MonoBehaviour
     {
         
     }
-    private void OnTriggerEnter(Collider other)
+    
+    private void OnCollisionEnter(Collision collision)
     {
-        if(other.tag == "CompanionCube")
+        if (collision.collider.tag == "CompanionCube")
         {
             Companion.instance.m_Rigidbody.AddForce(transform.forward * jumpAmount, ForceMode.Impulse);
         }

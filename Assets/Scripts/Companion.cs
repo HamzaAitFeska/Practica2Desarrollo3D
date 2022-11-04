@@ -54,13 +54,13 @@ public class Companion : MonoBehaviour
         m_Rigidbody.isKinematic = true;
         transform.forward = _Portal.m_MirrorPortal.transform.TransformDirection(l_Direction);
         transform.position = _Portal.m_MirrorPortal.transform.TransformPoint(l_Position) + l_WorldVelocity * m_OffsetPortal;
+        if(m_Rigidbody.velocity.x < 0)
+        {
+            m_Rigidbody.velocity = transform.position + _Portal.m_MirrorPortal.transform.TransformPoint(l_Position) + l_WorldVelocity * m_OffsetPortal;
+        }
         m_Rigidbody.isKinematic = false;
         transform.localScale = (_Portal.m_MirrorPortal.transform.localScale.x / _Portal.transform.localScale.x)* Vector3.one;
         m_Rigidbody.velocity = l_WorldVelocity;
-        if(m_Rigidbody.velocity == Vector3.zero)
-        {
-            m_Rigidbody.velocity = transform.position + l_WorldVelocity * m_OffsetPortal;
-        }
         m_ExitPortal = _Portal.m_MirrorPortal;
     }
 }
