@@ -3863,7 +3863,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2184905985369214331, guid: 126aa4b5831d3b84cae0574e86cc2228, type: 3}
       propertyPath: m_AttachingObjectSpeed
-      value: 60
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2184905985369214331, guid: 126aa4b5831d3b84cae0574e86cc2228, type: 3}
       propertyPath: m_PitchRotationalSpeed
@@ -3879,7 +3879,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2184905985369214331, guid: 126aa4b5831d3b84cae0574e86cc2228, type: 3}
       propertyPath: m_ThrowAttachedObjectForce
-      value: 700
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 2184905985369214332, guid: 126aa4b5831d3b84cae0574e86cc2228, type: 3}
       propertyPath: m_RootOrder
