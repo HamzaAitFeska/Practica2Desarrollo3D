@@ -78,7 +78,9 @@ public class FPSPlayerController : MonoBehaviour
     public Portal m_BluePortal;
     public Portal m_OrangePortal;
     public GameObject OrangeTexturee;
+    public GameObject BlueTexturee;
     public float m_OffsetPortal = 0.5f;
+    bool m_CanPassPortal;
     [Range(0.0f , 90.0f)] public float m_AngleTransformPortal; 
         
     void Start()
@@ -93,13 +95,14 @@ public class FPSPlayerController : MonoBehaviour
         m_IsRunning = false;
         instance = this;
         OrangeTexturee.SetActive(false);
+        BlueTexturee.SetActive(false);
         m_BluePortal.gameObject.SetActive(false);
         m_OrangePortal.gameObject.SetActive(false);
         CrosshairBlue.gameObject.SetActive(false);
         CrossHairOrange.gameObject.SetActive(false);
         CrossHairFull.gameObject.SetActive(false);
-        //poolDecals = new TcObjectPool1(DecalsElements, PrefabBulletHole);
-        //AudioController.instance.Stop(AudioController.instance.TopGmusic);
+        m_CanPassPortal = false;
+        
     }
 
 #if UNITY_EDITOR
@@ -145,7 +148,7 @@ public class FPSPlayerController : MonoBehaviour
         //Run if shift is pressed
         if (Input.GetKey(m_RunKeyCode) && m_Direction != Vector3.zero & !m_IsReloading)
         {
-            l_Speed = m_PlayerSpeed * m_FastSpeedMultiplier;
+            //l_Speed = m_PlayerSpeed * m_FastSpeedMultiplier;
             l_FOV = m_RunMovementFOV;
             //SetRunWeaponAnimation();
             m_IsRunning = true;
@@ -243,7 +246,7 @@ public class FPSPlayerController : MonoBehaviour
             if (Input.GetMouseButtonUp(0))
             {
                 Shoot(m_BluePortal);
-                OrangeTexturee.SetActive(false);
+                BlueTexturee.SetActive(false);
             }
 
             if (Input.GetMouseButtonUp(1))
@@ -254,12 +257,17 @@ public class FPSPlayerController : MonoBehaviour
 
             if (Input.GetMouseButton(0))
             {
-                CheckOrange();
+                CheckBlue();
             }
 
             if (Input.GetMouseButton(1))
             {
                 CheckOrange();
+            }
+
+            if(Input.GetMouseButtonUp(0) && Input.GetMouseButtonUp(1))
+            {
+                Shoot(m_BluePortal);
             }
         }
 
@@ -274,6 +282,14 @@ public class FPSPlayerController : MonoBehaviour
             
         }
 
+        if(m_BluePortal.gameObject.activeInHierarchy && m_OrangePortal.gameObject.activeInHierarchy)
+        {
+            m_CanPassPortal = true;
+        }
+        else
+        {
+            m_CanPassPortal = false;
+        }
     }
 
     bool CanAttachObject()
@@ -339,12 +355,12 @@ public class FPSPlayerController : MonoBehaviour
 
     public IEnumerator EndShoot()
     {
-        yield return new WaitForSeconds(0);//m_ShotClip.length);
+        yield return new WaitForSeconds(0);
         m_Shooting = false;
     }
     bool CanShhot()
     {
-        return !m_Shooting && !m_IsReloading;//PlayerAmmo.instance.currentAmmo > 0 && PlayerLife.instance.currentLife > 0 && !m_IsRunning;
+        return !m_Shooting && !m_IsReloading;
     }
     public float m_MaxShootDistance = 50.0f;
     public LayerMask m_ShootingLayerMask;
@@ -361,46 +377,11 @@ public class FPSPlayerController : MonoBehaviour
             _Portal.gameObject.SetActive(false);
         }
         //AudioController.instance.PlayOneShot(AudioController.instance.weaponShoot);
-        //Ray l_Ray = m_Camera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
-        //RaycastHit l_RaycastHit;
-        //if(Physics.Raycast(l_Ray, out l_RaycastHit, m_MaxShootDistance, m_ShootingLayerMask))
-        //{
-          //  CreatShootHitParticle(l_RaycastHit.collider, l_RaycastHit.point, l_RaycastHit.normal);
-        //}
-        //SetShootWeaponAnimation();
-        //m_Shooting = true;
-        //StartCoroutine(EndShoot());
-       /* if(2 > 0)
-        {
-            //PlayerAmmo.instance.LoseAmmo();
-        }
-        if(2<= 0)
-        {
-            //PlayerAmmo.instance.currentAmmo = 0;
-        }
-        if (l_RaycastHit.collider.CompareTag("DronCollider"))
-        {
-            //l_RaycastHit.collider.GetComponent<HitCollider>().Hit();
-            
-        }
-        if (l_RaycastHit.collider.CompareTag("TargetCollider"))
-        {
-            m_TargetHit = true;
-            m_TotalPoints += 25;
-            //if(ShootingGalery.instance.time <= 0)
-            //{
-              //  m_TotalPoints -= 25;
-            //}
-
-        }*/
+        
     }
 
     void CreatShootHitParticle(Collider collider,Vector3 position,Vector3 Normal)
     {
-        //poolDecals.GetNextElemnt();
-        //_Decal.SetActive(true);
-        //l_Decal.transform.position = position;
-        //l_Decal.transform.rotation = Quaternion.LookRotation(Normal);
         if (collider.CompareTag("DronCollider"))
         {
            /// l_Decal.SetActive(false);
@@ -439,17 +420,12 @@ public class FPSPlayerController : MonoBehaviour
     }*/
     private void OnTriggerEnter(Collider other)
     {
-        //if (other.CompareTag("DeathTrapTrigger"))
-        //{
-            //PlayerLife.instance.currentLife = 0;
-        //}
-
         if (other.CompareTag("DeadZone"))
         {
             PlayerLife.instance.currentLife = 0;
         }
 
-        if (other.CompareTag("Portal"))
+        if (other.CompareTag("Portal") && m_CanPassPortal)
         {
             Portal l_Portal = other.GetComponent<Portal>();
             if(Vector3.Dot(l_Portal.transform.forward, -m_Direction) > Mathf.Cos(m_AngleTransformPortal * Mathf.Deg2Rad))
@@ -527,6 +503,8 @@ public class FPSPlayerController : MonoBehaviour
                 Position = l_RaycastHit.point;
                 OrangeTexturee.transform.position = Position;
                 OrangeTexturee.transform.rotation = Quaternion.LookRotation(Normal);
+                BlueTexturee.transform.position = Position;
+                BlueTexturee.transform.rotation = Quaternion.LookRotation(Normal);
             }
         }
 
@@ -544,6 +522,20 @@ public class FPSPlayerController : MonoBehaviour
         else
         {
             OrangeTexturee.SetActive(false);
+        }
+    }
+
+    void CheckBlue()
+    {
+        Vector3 l_Position;
+        Vector3 l_Normal;
+        if (OrangeTexture(m_Camera.transform.position, m_Camera.transform.forward, m_MaxShootDistance, m_ShootingLayerMask, out l_Position, out l_Normal))
+        {
+            BlueTexturee.SetActive(true);
+        }
+        else
+        {
+            BlueTexturee.SetActive(false);
         }
     }
 

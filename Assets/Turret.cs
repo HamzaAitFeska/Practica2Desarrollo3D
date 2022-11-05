@@ -35,7 +35,7 @@ public class Turret : MonoBehaviour
                 l_EndRaycastPosition = Vector3.forward * m_MaxDistance;
             }
 
-            m_LineRenderer.SetPosition(1, l_EndRaycastPosition);
+            m_LineRenderer.SetPosition(1, l_EndRaycastPosition +Vector3.up);
         }
 
     }
