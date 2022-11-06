@@ -43,9 +43,9 @@ public class FPSPlayerController : MonoBehaviour
     public bool m_IsReloading;
     public bool m_IsRunning;
 
-    //public Animation m_Animation;
-    //public AnimationClip m_IdleClip;
-    //public AnimationClip m_ShotClip;
+    public Animation m_Animation;
+    public AnimationClip m_IdleClip;
+    public AnimationClip m_ShotClip;
     //public AnimationClip m_ReloadClip;
     //public AnimationClip m_RunClip;
 
@@ -89,7 +89,7 @@ public class FPSPlayerController : MonoBehaviour
         m_Pitch = m_PitchCotroller.localRotation.x;
         Cursor.lockState = CursorLockMode.Locked;
         m_AimLocked = Cursor.lockState == CursorLockMode.Locked;
-        //SetIdleWeaponAnimation();
+        SetIdleWeaponAnimation();
         m_Shooting = false;
         m_IsReloading = false;
         m_IsRunning = false;
@@ -243,16 +243,20 @@ public class FPSPlayerController : MonoBehaviour
         }
         else if(!m_AttachingObject)
         {
-            if (Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonUp(0) && CanShhot())
             {
+                AudioController.instance.PlayOneShot(AudioController.instance.weaponShootBlue);
                 Shoot(m_BluePortal);
                 BlueTexturee.SetActive(false);
+                m_BluePortal.transform.localScale = BlueTexturee.transform.localScale;
             }
 
-            if (Input.GetMouseButtonUp(1))
+            if (Input.GetMouseButtonUp(1) && CanShhot())
             {
+                AudioController.instance.PlayOneShot(AudioController.instance.weaponShootOrange);
                 Shoot(m_OrangePortal);
                 OrangeTexturee.SetActive(false);
+                m_OrangePortal.transform.localScale = OrangeTexturee.transform.localScale;
             }
 
             if (Input.GetMouseButton(0))
@@ -271,16 +275,7 @@ public class FPSPlayerController : MonoBehaviour
             }
         }
 
-        if(Input.GetAxis("Mouse ScrollWheel") > 0f && OrangeTexturee.transform.localScale.x < 1.25f)
-        {
-            OrangeTexturee.transform.localScale += new Vector3(0.25f,0.5f,0);
-            
-        }
-        else if(Input.GetAxis("Mouse ScrollWheel") < 0f && OrangeTexturee.transform.localScale.x > 0.75f)
-        {
-            OrangeTexturee.transform.localScale -= new Vector3(0.25f,0.5f,0);
-            
-        }
+        ScrollWheel();
 
         if(m_BluePortal.gameObject.activeInHierarchy && m_OrangePortal.gameObject.activeInHierarchy)
         {
@@ -355,7 +350,7 @@ public class FPSPlayerController : MonoBehaviour
 
     public IEnumerator EndShoot()
     {
-        yield return new WaitForSeconds(0);
+        yield return new WaitForSeconds(m_ShotClip.length);
         m_Shooting = false;
     }
     bool CanShhot()
@@ -376,8 +371,10 @@ public class FPSPlayerController : MonoBehaviour
         {
             _Portal.gameObject.SetActive(false);
         }
-        //AudioController.instance.PlayOneShot(AudioController.instance.weaponShoot);
-        
+        SetShootWeaponAnimation();
+        m_Shooting = true;
+        StartCoroutine(EndShoot());
+                        
     }
 
     void CreatShootHitParticle(Collider collider,Vector3 position,Vector3 Normal)
@@ -398,7 +395,7 @@ public class FPSPlayerController : MonoBehaviour
 
     }
 
-    /*void SetIdleWeaponAnimation()
+    void SetIdleWeaponAnimation()
     {
         m_Animation.CrossFade(m_IdleClip.name);
     }
@@ -408,7 +405,7 @@ public class FPSPlayerController : MonoBehaviour
         m_Animation.CrossFade(m_ShotClip.name,0.05f);
         m_Animation.CrossFadeQueued(m_IdleClip.name,0.05f);
     }
-    void SetRunWeaponAnimation()
+    /*void SetRunWeaponAnimation()
     {
         m_Animation.CrossFade(m_RunClip.name, 0.1f);
         m_Animation.CrossFadeQueued(m_IdleClip.name, 0.1f);
@@ -469,6 +466,32 @@ public class FPSPlayerController : MonoBehaviour
             CrosshairBlue.gameObject.SetActive(false);
             CrossHairFull.gameObject.SetActive(false);
         }
+    }
+
+    private void ScrollWheel()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f && OrangeTexturee.transform.localScale.x < 1.25f && OrangeTexturee.activeInHierarchy)
+        {
+            OrangeTexturee.transform.localScale += new Vector3(0.25f, 0.25f, 0);
+            
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0f && OrangeTexturee.transform.localScale.x > 0.75f && OrangeTexturee.activeInHierarchy)
+        {
+            OrangeTexturee.transform.localScale -= new Vector3(0.25f, 0.25f, 0);
+            
+        }
+
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f && BlueTexturee.transform.localScale.x < 1.25f && BlueTexturee.activeInHierarchy)
+        {
+            BlueTexturee.transform.localScale += new Vector3(0.25f, 0.25f, 0);
+
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0f &&  BlueTexturee.transform.localScale.x > 0.75f && BlueTexturee.activeInHierarchy)
+        {
+            BlueTexturee.transform.localScale -= new Vector3(0.25f, 0.25f, 0);
+
+        }
+
     }
 
     public void Teleport(Portal _Portal)
