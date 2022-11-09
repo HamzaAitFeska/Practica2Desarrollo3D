@@ -14,7 +14,8 @@ public class PlayerLife : MonoBehaviour
     
     public KeyCode damagePlayer;
     public Vector3 CheckpointPosition;
-    public Quaternion CheckpointRotation;
+    public float CheckpoinPitch;
+    public float CheckPointYaw;
     public bool m_IsDead;
     public bool m_PlayedOnce;
     public bool m_IsCreated;
@@ -27,7 +28,7 @@ public class PlayerLife : MonoBehaviour
         instance = this;
         currentLife = maxLife;
         m_IsCreated = false;
-        transform.rotation = CheckpointRotation;
+        //transform.rotation = CheckpointRotation;
         m_IsDead = false;
         m_PlayedOnce = false;
         GameOver.SetActive(false);
@@ -77,7 +78,8 @@ public class PlayerLife : MonoBehaviour
         yield return new WaitForSeconds(1f);
         currentLife = maxLife;
         transform.position = CheckpointPosition;
-        FPSPlayerController.instance.m_PitchCotroller.rotation = CheckpointRotation;
+        FPSPlayerController.instance.m_Yaw = CheckPointYaw;
+        FPSPlayerController.instance.m_Pitch = CheckpoinPitch;
         FPSPlayerController.instance.m_characterController.enabled = true;
         FPSPlayerController.instance.m_AngleLocked = false;
         UI.SetActive(true);

@@ -9,8 +9,8 @@ public class CheckPoint : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             PlayerLife.instance.CheckpointPosition = transform.position;
-            PlayerLife.instance.CheckpointRotation.x = FPSPlayerController.instance.m_PitchCotroller.rotation.x;
-            PlayerLife.instance.CheckpointRotation.y = FPSPlayerController.instance.transform.rotation.y;
+            PlayerLife.instance.CheckpoinPitch = FPSPlayerController.instance.m_Pitch;
+            PlayerLife.instance.CheckPointYaw = FPSPlayerController.instance.m_Yaw;
             //AudioController.instance.PlayOneShot(AudioController.instance.uiWarning);
             Destroy(gameObject);
         }

@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class FPSPlayerController : MonoBehaviour
 {
-    float m_Yaw;
-    float m_Pitch;
+    public float m_Yaw;
+    public float m_Pitch;
     public float m_PitchRotationalSpeed;
     public float m_YawRotationalSpeed;
     public float m_AirTime;
