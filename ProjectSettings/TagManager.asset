@@ -10,6 +10,7 @@ TagManager:
   - Cube
   - CompanionCube
   - RefractionCube
+  - Turret
   layers:
   - Default
   - TransparentFX

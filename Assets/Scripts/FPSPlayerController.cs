@@ -298,7 +298,7 @@ public class FPSPlayerController : MonoBehaviour
         RaycastHit l_raycastHit;
         if(Physics.Raycast(l_Ray, out l_raycastHit, m_MaxDistanceAttachObject, m_AttachObjectMask.value))
         {
-            if (l_raycastHit.collider.tag=="CompanionCube")
+            if (l_raycastHit.collider.tag =="CompanionCube")
             {
                 m_AttachingObject = true;
                 m_ObjectAttached = l_raycastHit.collider.GetComponent<Rigidbody>();
@@ -307,13 +307,32 @@ public class FPSPlayerController : MonoBehaviour
                 m_AttachingObjectStartRotation = l_raycastHit.collider.transform.rotation;
                
             }
-            
+
+            if (l_raycastHit.collider.tag == "Turret")
+            {
+                m_AttachingObject = true;
+                m_ObjectAttached = l_raycastHit.collider.GetComponent<Rigidbody>();
+                m_ObjectAttached.GetComponent<Turret>().SetAttached(true);
+                m_ObjectAttached.isKinematic = true;
+                m_AttachingObjectStartRotation = l_raycastHit.collider.transform.rotation;
+
+            }
+
 
         }
     }
     void ThrowAttachedObject(float force)
     {
-        if(m_ObjectAttached != null)
+        if(m_ObjectAttached != null && m_ObjectAttached.tag == "Turret")
+        {
+            m_ObjectAttached.transform.SetParent(null);
+            m_ObjectAttached.isKinematic = false;
+            m_ObjectAttached.AddForce(m_PitchCotroller.forward * force);
+            m_ObjectAttached.GetComponent<Turret>().SetAttached(false);
+            m_ObjectAttached = null;
+        }
+
+        if (m_ObjectAttached != null && m_ObjectAttached.tag == "CompanionCube")
         {
             m_ObjectAttached.transform.SetParent(null);
             m_ObjectAttached.isKinematic = false;
@@ -321,6 +340,7 @@ public class FPSPlayerController : MonoBehaviour
             m_ObjectAttached.GetComponent<Companion>().SetAttached(false);
             m_ObjectAttached = null;
         }
+
     }
     void UpdateAttachObject() 
     {
@@ -332,7 +352,7 @@ public class FPSPlayerController : MonoBehaviour
         if (l_Movement >= l_Distance)
         {
             m_AttachingObject = false;
-             m_ObjectAttached.transform.SetParent(m_AttachingPosition);
+            m_ObjectAttached.transform.SetParent(m_AttachingPosition);
             m_ObjectAttached.transform.localPosition = Vector3.zero;
             m_ObjectAttached.transform.localRotation = Quaternion.identity;
             m_ObjectAttached.MovePosition(m_AttachingPosition.position);
