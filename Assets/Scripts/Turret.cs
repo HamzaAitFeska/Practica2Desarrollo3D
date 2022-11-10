@@ -1,13 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Turret : MonoBehaviour
 {
     // Start is called before the first frame update
-    public LineRenderer m_LineRenderer;
-    public LayerMask m_CollisionLayerMask;
-    public float m_MaxDistance;
+    public Laser m_Laser;
     public float m_AngleLaserActive;
     void Start()
     {
@@ -17,27 +14,19 @@ public class Turret : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        TurretRangeLaser();
+        TurretLaserRange();        
+        
     }
 
-    void TurretRangeLaser()
+    
+    void TurretLaserRange()
     {
-        RaycastHit l_RaycastHit;
-        if(Physics.Raycast(new Ray(m_LineRenderer.transform.position, m_LineRenderer.transform.forward), out l_RaycastHit, m_MaxDistance, m_CollisionLayerMask.value))
+        bool l_LaserAlive = Vector3.Dot(transform.up, Vector3.up) > Mathf.Cos(m_AngleLaserActive * Mathf.Deg2Rad);
+        m_Laser.m_LineRenderer.gameObject.SetActive(l_LaserAlive);
+        if (l_LaserAlive)
         {
-            Vector3 l_EndRaycastPosition;
-            if(l_RaycastHit.collider)
-            {
-                l_EndRaycastPosition = Vector3.forward * l_RaycastHit.distance;
-            }
-            else
-            {
-                l_EndRaycastPosition = Vector3.forward * m_MaxDistance;
-            }
-
-            m_LineRenderer.SetPosition(1, l_EndRaycastPosition +Vector3.up);
+            m_Laser.Shoot();
         }
-
     }
 
 }
