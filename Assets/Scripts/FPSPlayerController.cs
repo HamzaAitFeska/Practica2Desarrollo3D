@@ -30,6 +30,8 @@ public class FPSPlayerController : MonoBehaviour
     public KeyCode m_DownKeyCode;
     public KeyCode m_JumpKeyCode = KeyCode.Space;
     public KeyCode m_RunKeyCode = KeyCode.LeftShift;
+    public KeyCode m_ThrowObject = KeyCode.G;
+    public KeyCode m_PickObject = KeyCode.E;
     public KeyCode m_DebugLockAngleKeyCode = KeyCode.I;
     public KeyCode m_DebugLockKeyCode = KeyCode.O;
 
@@ -217,9 +219,10 @@ public class FPSPlayerController : MonoBehaviour
 
         
 
-        if(Input.GetKeyDown(KeyCode.E) && CanAttachObject())
+        if(Input.GetKeyDown(m_PickObject) && CanAttachObject())
         {
             AttachObject();
+
         }
 
         CrosshairPortals();
@@ -231,11 +234,11 @@ public class FPSPlayerController : MonoBehaviour
 
         if (m_ObjectAttached && !m_AttachingObject)
         {
-            if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown(m_ThrowObject))
             {
                 ThrowAttachedObject(m_ThrowAttachedObjectForce);
             }
-            if (Input.GetKeyDown(KeyCode.B))
+            if (Input.GetKeyDown(m_PickObject) && !CanAttachObject())
             {
                 ThrowAttachedObject(0.0f);
             }
