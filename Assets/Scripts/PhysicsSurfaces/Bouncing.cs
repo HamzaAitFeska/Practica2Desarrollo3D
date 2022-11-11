@@ -19,5 +19,10 @@ public class Bouncing : MonoBehaviour
         {
             Companion.instance.m_Rigidbody.AddForce(transform.forward * jumpAmount, ForceMode.Impulse);
         }
+
+        if(collision.collider.tag == "Turret")
+        {
+            Turret.instance.m_Rigidbody.AddForce(transform.forward * jumpAmount, ForceMode.Impulse);
+        }
     }
 }

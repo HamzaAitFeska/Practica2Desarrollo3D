@@ -10,9 +10,11 @@ public class Turret : MonoBehaviour
     bool m_IsAttached = false;
     public float m_OffsetPortal = 1.5f;
     Portal m_ExitPortal = null;
+    public static Turret instance;
     void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
+        instance = this;
     }
 
     public void SetAttached(bool Attached)

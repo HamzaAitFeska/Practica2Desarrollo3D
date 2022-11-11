@@ -20,5 +20,10 @@ public class Destroying : MonoBehaviour
         {
             Destroy(Companion.instance.m_Rigidbody.gameObject, 0.1f);
         }
+
+        if(other.tag == "Turret")
+        {
+            Destroy(Turret.instance.m_Rigidbody.gameObject, 0.1f);
+        }
     }
 }
