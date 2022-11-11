@@ -91,7 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2184905983836550287}
   m_Layer: 6
-  m_Name: M16Parent
+  m_Name: PortalGunParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -350,6 +350,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b45748ac2c512643920547dc8fc15d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Yaw: 0
+  m_Pitch: 0
   m_PitchRotationalSpeed: 0
   m_YawRotationalSpeed: 0
   m_AirTime: 0
@@ -377,6 +379,9 @@ MonoBehaviour:
   m_Shooting: 0
   m_IsReloading: 0
   m_IsRunning: 0
+  m_Animation: {fileID: 0}
+  m_IdleClip: {fileID: 0}
+  m_ShotClip: {fileID: 0}
   m_PlayerIsMoving: 0
   m_OnGround: 1
   m_JumpSpeed: 10
@@ -384,12 +389,24 @@ MonoBehaviour:
   m_AimLocked: 1
   m_TargetHit: 0
   DecalsElements: 15
+  m_AttachingPosition: {fileID: 0}
+  m_AttachingObjectSpeed: 20
+  m_MaxDistanceAttachObject: 10
+  m_AttachObjectMask:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ThrowAttachedObjectForce: 100
+  m_Direction: {x: 0, y: 0, z: 0}
   CrosshairEmpty: {fileID: 0}
   CrosshairBlue: {fileID: 0}
   CrossHairOrange: {fileID: 0}
   CrossHairFull: {fileID: 0}
   m_BluePortal: {fileID: 0}
   m_OrangePortal: {fileID: 0}
+  OrangeTexturee: {fileID: 0}
+  BlueTexturee: {fileID: 0}
+  m_OffsetPortal: 0.5
+  m_AngleTransformPortal: 0
   m_MaxShootDistance: 50
   m_ShootingLayerMask:
     serializedVersion: 2
@@ -426,7 +443,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damagePlayer: 0
   CheckpointPosition: {x: 0, y: 0, z: 0}
-  CheckpointRotation: {x: 0, y: 0, z: 0, w: 0}
+  CheckpoinPitch: 0
+  CheckPointYaw: 0
   m_IsDead: 0
   m_PlayedOnce: 0
   m_IsCreated: 0
