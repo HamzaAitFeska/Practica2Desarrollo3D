@@ -4399,7 +4399,7 @@ PrefabInstance:
       objectReference: {fileID: 1401816782}
     - target: {fileID: 2184905985369214331, guid: 126aa4b5831d3b84cae0574e86cc2228, type: 3}
       propertyPath: m_OffsetPortal
-      value: 6
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2184905985369214331, guid: 126aa4b5831d3b84cae0574e86cc2228, type: 3}
       propertyPath: m_OrangePortal
