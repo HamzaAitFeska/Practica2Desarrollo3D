@@ -48,8 +48,7 @@ public class FPSPlayerController : MonoBehaviour
     public Animation m_Animation;
     public AnimationClip m_IdleClip;
     public AnimationClip m_ShotClip;
-    //public AnimationClip m_ReloadClip;
-    //public AnimationClip m_RunClip;
+    public AnimationClip m_FailShotClip;
 
     public bool m_PlayerIsMoving = false;
     //public TcObjectPool1 poolDecals;
@@ -397,6 +396,7 @@ public class FPSPlayerController : MonoBehaviour
         {
             _Portal.gameObject.SetActive(false);
             AudioController.instance.PlayOneShot(AudioController.instance.portalInvalidSurface);
+            SetShootFailWeaponAnimation();
         }              
     }
 
@@ -427,6 +427,11 @@ public class FPSPlayerController : MonoBehaviour
     {
         m_Animation.CrossFade(m_ShotClip.name,0.05f);
         m_Animation.CrossFadeQueued(m_IdleClip.name,0.05f);
+    }
+    void SetShootFailWeaponAnimation()
+    {
+        m_Animation.CrossFade(m_FailShotClip.name, 0.05f);
+        m_Animation.CrossFadeQueued(m_IdleClip.name, 0.05f);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -519,6 +524,7 @@ public class FPSPlayerController : MonoBehaviour
         m_Yaw = transform.rotation.eulerAngles.y;
         transform.position = _Portal.m_MirrorPortal.transform.TransformPoint(l_Position) + l_WorldDirectionMovement * m_OffsetPortal;
         m_characterController.enabled = true;
+        RandomizePortalEnterSound();
     }
 
     public bool OrangeTexture(Vector3 StartPosition, Vector3 forward, float MaxDistance, LayerMask PortalLayerMask, out Vector3 Position, out Vector3 Normal)
@@ -573,5 +579,9 @@ public class FPSPlayerController : MonoBehaviour
         {
             BlueTexturee.SetActive(false);
         }
+    }
+    void RandomizePortalEnterSound()
+    {
+        AudioController.instance.PlayOneShot(AudioController.instance.portalEnter[Random.Range(0, AudioController.instance.portalEnter.Length)]);
     }
 }

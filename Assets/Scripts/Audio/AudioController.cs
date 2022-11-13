@@ -6,7 +6,8 @@ using UnityEngine.Audio;
 public class AudioController : MonoBehaviour
 {
     public AudioMixer ambient, effects;
-    public AudioSource weaponShootBlue, weaponShootOrange, portalInvalidSurface, portalAmbientLoop;
+    public AudioSource weaponShootBlue, weaponShootOrange, portalInvalidSurface;
+    public AudioSource[] portalEnter;
 
     public static AudioController instance;
 
