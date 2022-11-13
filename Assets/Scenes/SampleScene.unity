@@ -2570,15 +2570,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 17410149526647423, guid: 2c26a8ee4a5178a459e18985ccf5c662, type: 3}
       propertyPath: m_PlayOnAwake
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1662446480859695648, guid: 2c26a8ee4a5178a459e18985ccf5c662, type: 3}
       propertyPath: m_PlayOnAwake
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4668684527903656886, guid: 2c26a8ee4a5178a459e18985ccf5c662, type: 3}
       propertyPath: m_PlayOnAwake
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6440291643099104370, guid: 2c26a8ee4a5178a459e18985ccf5c662, type: 3}
       propertyPath: m_Name
@@ -6205,6 +6205,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 17410149526647423, guid: 2c26a8ee4a5178a459e18985ccf5c662, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1662446480859695648, guid: 2c26a8ee4a5178a459e18985ccf5c662, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4668684527903656886, guid: 2c26a8ee4a5178a459e18985ccf5c662, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6440291643099104370, guid: 2c26a8ee4a5178a459e18985ccf5c662, type: 3}
       propertyPath: m_Name
       value: BluePortal
