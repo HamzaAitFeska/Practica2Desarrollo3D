@@ -220,8 +220,7 @@ public class FPSPlayerController : MonoBehaviour
 
         if(Input.GetKeyDown(m_PickObject) && CanAttachObject())
         {
-            AttachObject();
-
+            AttachObject();  
         }
 
         CrosshairPortals();
@@ -305,7 +304,8 @@ public class FPSPlayerController : MonoBehaviour
                 m_ObjectAttached.GetComponent<Companion>().SetAttached(true);
                 m_ObjectAttached.isKinematic = true;
                 m_AttachingObjectStartRotation = l_raycastHit.collider.transform.rotation;
-               
+                AudioController.instance.PlayOneShot(AudioController.instance.pickupObject);
+                AudioController.instance.Play(AudioController.instance.pickupObjectLoop);
             }
 
             if (l_raycastHit.collider.tag == "Turret")
@@ -315,7 +315,8 @@ public class FPSPlayerController : MonoBehaviour
                 m_ObjectAttached.GetComponent<Turret>().SetAttached(true);
                 m_ObjectAttached.isKinematic = true;
                 m_AttachingObjectStartRotation = l_raycastHit.collider.transform.rotation;
-
+                AudioController.instance.PlayOneShot(AudioController.instance.pickupObject);
+                AudioController.instance.Play(AudioController.instance.pickupObjectLoop);
             }
 
 
@@ -330,6 +331,8 @@ public class FPSPlayerController : MonoBehaviour
             m_ObjectAttached.AddForce(m_PitchCotroller.forward * force);
             m_ObjectAttached.GetComponent<Turret>().SetAttached(false);
             m_ObjectAttached = null;
+            AudioController.instance.PlayOneShot(AudioController.instance.dropObject);
+            AudioController.instance.Stop(AudioController.instance.pickupObjectLoop);
         }
 
         if (m_ObjectAttached != null && m_ObjectAttached.tag == "CompanionCube")
@@ -339,6 +342,8 @@ public class FPSPlayerController : MonoBehaviour
             m_ObjectAttached.AddForce(m_PitchCotroller.forward * force);
             m_ObjectAttached.GetComponent<Companion>().SetAttached(false);
             m_ObjectAttached = null;
+            AudioController.instance.PlayOneShot(AudioController.instance.dropObject);
+            AudioController.instance.Stop(AudioController.instance.pickupObjectLoop);
         }
 
     }
