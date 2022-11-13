@@ -9,33 +9,46 @@ public class Button : MonoBehaviour
     public AnimationClip m_ButtonOff;
     public GameObject buttonLight;
 
-    bool l_ButtonChangingState = false;
+    bool l_ButtonOnAnimation = false;
+    bool l_EntityIsOnButton = false;
+    bool l_ButtonActive = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        if ((other.tag == "Player" || other.tag == "CompanionCube") && !l_ButtonChangingState)
+        if ((other.tag == "Player" || other.tag == "CompanionCube") && !l_ButtonOnAnimation)
         {
+            l_EntityIsOnButton = true;
             SetButtonOnAnimation();
             Debug.Log("ON");
-            l_ButtonChangingState = true;
+            l_ButtonOnAnimation = true;
             StartCoroutine(ButtonIsPressed());
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if ((other.tag == "Player" || other.tag =="CompanionCube") && !l_ButtonChangingState)
+        if ((other.tag == "Player" || other.tag =="CompanionCube"))
         {
+            l_EntityIsOnButton = false;
             SetButtonOffAnimation();
             buttonLight.SetActive(false);
-            AudioController.instance.PlayOneShot(AudioController.instance.buttonNegative);
+            if (l_ButtonActive)
+            {
+                AudioController.instance.PlayOneShot(AudioController.instance.buttonNegative);
+            }
+            l_ButtonActive = false;
+            l_ButtonOnAnimation = false; ;
         }
     }
     public IEnumerator ButtonIsPressed()
     {
         yield return new WaitForSeconds(m_ButtonOn.length);
-        buttonLight.SetActive(true);
-        AudioController.instance.PlayOneShot(AudioController.instance.buttonPositive);
-        l_ButtonChangingState = false;
+        if (l_EntityIsOnButton)
+        {
+            buttonLight.SetActive(true);
+            AudioController.instance.PlayOneShot(AudioController.instance.buttonPositive);
+            l_ButtonOnAnimation = false;
+            l_ButtonActive = true;
+        } 
     }
     void SetButtonOnAnimation()
     {
