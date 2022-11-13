@@ -13,6 +13,7 @@ public class Portal : MonoBehaviour
     public float m_MaxValidDistance;
     public float m_MinDotValidAngle;
     //public GameObject Offset;
+    public AudioSource[] portalOpening;
 
     private void LateUpdate()
     {
@@ -86,9 +87,11 @@ public class Portal : MonoBehaviour
             }
 
         }
+        if (l_Valid) RandomizeOpenSound();
         return l_Valid;
     }
-
-
-   
+    void RandomizeOpenSound()
+    {
+        AudioController.instance.PlayOneShot(portalOpening[Random.Range(0, portalOpening.Length)]);
+    }
 }

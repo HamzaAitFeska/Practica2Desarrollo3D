@@ -248,7 +248,6 @@ public class FPSPlayerController : MonoBehaviour
         {
             if (Input.GetMouseButtonUp(0) && CanShhot())
             {
-                AudioController.instance.PlayOneShot(AudioController.instance.weaponShootBlue);
                 Shoot(m_BluePortal);
                 BlueTexturee.SetActive(false);
                 m_BluePortal.transform.localScale = BlueTexturee.transform.localScale;
@@ -256,7 +255,6 @@ public class FPSPlayerController : MonoBehaviour
 
             if (Input.GetMouseButtonUp(1) && CanShhot())
             {
-                AudioController.instance.PlayOneShot(AudioController.instance.weaponShootOrange);
                 Shoot(m_OrangePortal);
                 OrangeTexturee.SetActive(false);
                 m_OrangePortal.transform.localScale = OrangeTexturee.transform.localScale;
@@ -389,15 +387,17 @@ public class FPSPlayerController : MonoBehaviour
         if(_Portal.IsValidPosition(m_Camera.transform.position, m_Camera.transform.forward,m_MaxShootDistance,m_ShootingLayerMask,out l_Position,out l_Normal))
         {
             _Portal.gameObject.SetActive(true);
+            if (_Portal == m_BluePortal) AudioController.instance.PlayOneShot(AudioController.instance.weaponShootBlue);
+            else if (_Portal == m_OrangePortal) AudioController.instance.PlayOneShot(AudioController.instance.weaponShootOrange);
+            SetShootWeaponAnimation();
+            m_Shooting = true;
+            StartCoroutine(EndShoot());
         }
         else
         {
             _Portal.gameObject.SetActive(false);
-        }
-        SetShootWeaponAnimation();
-        m_Shooting = true;
-        StartCoroutine(EndShoot());
-                        
+            AudioController.instance.PlayOneShot(AudioController.instance.portalInvalidSurface);
+        }              
     }
 
     void CreatShootHitParticle(Collider collider,Vector3 position,Vector3 Normal)
@@ -428,16 +428,7 @@ public class FPSPlayerController : MonoBehaviour
         m_Animation.CrossFade(m_ShotClip.name,0.05f);
         m_Animation.CrossFadeQueued(m_IdleClip.name,0.05f);
     }
-    /*void SetRunWeaponAnimation()
-    {
-        m_Animation.CrossFade(m_RunClip.name, 0.1f);
-        m_Animation.CrossFadeQueued(m_IdleClip.name, 0.1f);
-    }
-    void SetIdleWeaponWithRunAnimation()
-    {
-        m_Animation.CrossFade(m_IdleClip.name, 0.1f);
-        m_Animation.CrossFadeQueued(m_RunClip.name, 0.1f);
-    }*/
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("DeadZone"))
@@ -528,7 +519,6 @@ public class FPSPlayerController : MonoBehaviour
         m_Yaw = transform.rotation.eulerAngles.y;
         transform.position = _Portal.m_MirrorPortal.transform.TransformPoint(l_Position) + l_WorldDirectionMovement * m_OffsetPortal;
         m_characterController.enabled = true;
-        
     }
 
     public bool OrangeTexture(Vector3 StartPosition, Vector3 forward, float MaxDistance, LayerMask PortalLayerMask, out Vector3 Position, out Vector3 Normal)
@@ -584,5 +574,4 @@ public class FPSPlayerController : MonoBehaviour
             BlueTexturee.SetActive(false);
         }
     }
-
 }
