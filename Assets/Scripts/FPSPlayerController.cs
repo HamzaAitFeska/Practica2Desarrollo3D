@@ -80,6 +80,7 @@ public class FPSPlayerController : MonoBehaviour
     public Portal m_OrangePortal;
     public GameObject OrangeTexturee;
     public GameObject BlueTexturee;
+    public GameObject ProhibitedTexture;
     public float m_OffsetPortal = 0.5f;
     bool m_CanPassPortal;
     [Range(0.0f , 90.0f)] public float m_AngleTransformPortal; 
@@ -248,6 +249,7 @@ public class FPSPlayerController : MonoBehaviour
             {
                 Shoot(m_BluePortal);
                 BlueTexturee.SetActive(false);
+                ProhibitedTexture.SetActive(false);
                 m_BluePortal.transform.localScale = BlueTexturee.transform.localScale;
             }
 
@@ -255,17 +257,20 @@ public class FPSPlayerController : MonoBehaviour
             {
                 Shoot(m_OrangePortal);
                 OrangeTexturee.SetActive(false);
+                ProhibitedTexture.SetActive(false);
                 m_OrangePortal.transform.localScale = OrangeTexturee.transform.localScale;
             }
 
             if (Input.GetMouseButton(0))
             {
                 CheckBlue();
+                CheckCantPut();
             }
 
             if (Input.GetMouseButton(1))
             {
                 CheckOrange();
+                CheckCantPut();
             }
 
             if(Input.GetMouseButtonUp(0) && Input.GetMouseButtonUp(1))
@@ -405,24 +410,6 @@ public class FPSPlayerController : MonoBehaviour
         }              
     }
 
-    void CreatShootHitParticle(Collider collider,Vector3 position,Vector3 Normal)
-    {
-        if (collider.CompareTag("DronCollider"))
-        {
-           /// l_Decal.SetActive(false);
-        }
-        if (collider.CompareTag("Doors"))
-        {
-            //l_Decal.SetActive(false);
-        }
-
-        if (collider.CompareTag("TargetCollider"))
-        {
-            //l_Decal.SetActive(false);
-        }
-
-    }
-
     void SetIdleWeaponAnimation()
     {
         m_Animation.CrossFade(m_IdleClip.name);
@@ -556,6 +543,46 @@ public class FPSPlayerController : MonoBehaviour
         }
 
         return l_Valid;
+    }
+
+    public bool CantPut(Vector3 StartPosition, Vector3 forward, float MaxDistance, LayerMask PortalLayerMask, out Vector3 Position, out Vector3 Normal)
+    {
+        Ray l_Ray = new Ray(StartPosition, forward);
+        RaycastHit l_RaycastHit;
+        bool l_Valid = false;
+        Position = Vector3.zero;
+        Normal = Vector3.forward;
+
+        if (Physics.Raycast(l_Ray, out l_RaycastHit, MaxDistance, PortalLayerMask.value))
+        {
+            if (l_RaycastHit.collider.tag == "NotDrawableWall")
+            {
+
+                l_Valid = true;
+                Normal = l_RaycastHit.normal;
+                Position = l_RaycastHit.point;
+                ProhibitedTexture.transform.position = Position;
+                ProhibitedTexture.transform.rotation = Quaternion.LookRotation(Normal);
+                ProhibitedTexture.transform.position = Position;
+                ProhibitedTexture.transform.rotation = Quaternion.LookRotation(Normal);
+            }
+        }
+
+        return l_Valid;
+    }
+
+    void CheckCantPut()
+    {
+        Vector3 l_Position;
+        Vector3 l_Normal;
+        if(CantPut(m_Camera.transform.position, m_Camera.transform.forward, m_MaxShootDistance, m_ShootingLayerMask, out l_Position, out l_Normal))
+        {
+            ProhibitedTexture.SetActive(true);
+        }
+        else
+        {
+            ProhibitedTexture.SetActive(false);
+        }
     }
 
     void CheckOrange()
