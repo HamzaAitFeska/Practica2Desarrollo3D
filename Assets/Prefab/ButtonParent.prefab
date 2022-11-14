@@ -304,6 +304,9 @@ MonoBehaviour:
   m_ButtonOn: {fileID: 7400000, guid: 176b4f5a974dd6c4dbc2b3353ffa10bc, type: 2}
   m_ButtonOff: {fileID: 7400000, guid: e5cbedc530c8c744d84cf6015f6dadbc, type: 2}
   buttonLight: {fileID: 5754001881073723826}
+  buttonPositive: {fileID: 2454809808484022420}
+  buttonNegative: {fileID: 19411532759960667}
+  m_buttonOn: 0
 --- !u!111 &5754001882005210744
 Animation:
   m_ObjectHideFlags: 0

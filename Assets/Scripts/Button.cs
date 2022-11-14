@@ -8,10 +8,12 @@ public class Button : MonoBehaviour
     public AnimationClip m_ButtonOn;
     public AnimationClip m_ButtonOff;
     public GameObject buttonLight;
+    public AudioSource buttonPositive, buttonNegative;
 
     bool l_ButtonOnAnimation = false;
     bool l_EntityIsOnButton = false;
     bool l_ButtonActive = false;
+    public bool m_ButtonIsPressed = false;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -19,7 +21,6 @@ public class Button : MonoBehaviour
         {
             l_EntityIsOnButton = true;
             SetButtonOnAnimation();
-            Debug.Log("ON");
             l_ButtonOnAnimation = true;
             StartCoroutine(ButtonIsPressed());
         }
@@ -33,11 +34,12 @@ public class Button : MonoBehaviour
             buttonLight.SetActive(false);
             if (l_ButtonActive)
             {
-                AudioController.instance.PlayOneShot(AudioController.instance.buttonNegative);
+                AudioController.instance.PlayOneShot(buttonNegative);
+                m_ButtonIsPressed = false;
             }
             l_ButtonActive = false;
-            l_ButtonOnAnimation = false; ;
-        }
+            l_ButtonOnAnimation = false;
+        } 
     }
     public IEnumerator ButtonIsPressed()
     {
@@ -45,9 +47,10 @@ public class Button : MonoBehaviour
         if (l_EntityIsOnButton)
         {
             buttonLight.SetActive(true);
-            AudioController.instance.PlayOneShot(AudioController.instance.buttonPositive);
+            AudioController.instance.PlayOneShot(buttonPositive);
             l_ButtonOnAnimation = false;
             l_ButtonActive = true;
+            m_ButtonIsPressed = true;
         } 
     }
     void SetButtonOnAnimation()
