@@ -1915,6 +1915,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PTK_Wall_Medium_2 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1108593913779442, guid: 1123dde5e341fcd4b8c6e5c6cdd68e21, type: 3}
+      propertyPath: m_TagString
+      value: NotDrawableWall
+      objectReference: {fileID: 0}
     - target: {fileID: 4151842941387702, guid: 1123dde5e341fcd4b8c6e5c6cdd68e21, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -9785,6 +9789,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PTK_Wall_Medium_2 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1108593913779442, guid: 1123dde5e341fcd4b8c6e5c6cdd68e21, type: 3}
+      propertyPath: m_TagString
+      value: NotDrawableWall
+      objectReference: {fileID: 0}
     - target: {fileID: 4151842941387702, guid: 1123dde5e341fcd4b8c6e5c6cdd68e21, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -12847,6 +12855,7 @@ GameObject:
   - component: {fileID: 974158636}
   - component: {fileID: 974158637}
   - component: {fileID: 974158638}
+  - component: {fileID: 974158639}
   m_Layer: 6
   m_Name: Laser
   m_TagString: Untagged
@@ -12983,6 +12992,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_MaxDistance: 250
+--- !u!65 &974158639
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974158635}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 69.17}
+  m_Center: {x: 0, y: 0, z: 34.085}
 --- !u!4 &985580712 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4151842941387702, guid: 1123dde5e341fcd4b8c6e5c6cdd68e21, type: 3}

@@ -20,5 +20,13 @@ public class Laser : MonoBehaviour
         }
         m_LineRenderer.SetPosition(1, new Vector3(0, 0, l_laserDistance));
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            PlayerLife.instance.currentLife = 0;
+        }
+    }
 }
     

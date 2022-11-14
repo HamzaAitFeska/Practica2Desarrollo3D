@@ -41,6 +41,7 @@ public class PlayerLife : MonoBehaviour
         {
             currentLife = 0;
             GameOver.SetActive(true);
+            FPSPlayerController.instance.m_Shooting = true;
             FPSPlayerController.instance.m_AngleLocked = true;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
@@ -78,6 +79,7 @@ public class PlayerLife : MonoBehaviour
         yield return new WaitForSeconds(1f);
         currentLife = maxLife;
         transform.position = CheckpointPosition;
+        FPSPlayerController.instance.m_Shooting = false;
         FPSPlayerController.instance.m_Yaw = CheckPointYaw;
         FPSPlayerController.instance.m_Pitch = CheckpoinPitch;
         FPSPlayerController.instance.m_characterController.enabled = true;

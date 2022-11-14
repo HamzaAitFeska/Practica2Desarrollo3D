@@ -103,6 +103,7 @@ public class FPSPlayerController : MonoBehaviour
         CrosshairBlue.gameObject.SetActive(false);
         CrossHairOrange.gameObject.SetActive(false);
         CrossHairFull.gameObject.SetActive(false);
+        ProhibitedTexture.gameObject.SetActive(false);
         m_CanPassPortal = false;
         
     }
