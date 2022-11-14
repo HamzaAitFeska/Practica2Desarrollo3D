@@ -249,6 +249,7 @@ public class FPSPlayerController : MonoBehaviour
             if (Input.GetMouseButtonUp(0) && CanShhot())
             {
                 Shoot(m_BluePortal);
+                //Debug.Break();
                 BlueTexturee.SetActive(false);
                 ProhibitedTexture.SetActive(false);
                 m_BluePortal.transform.localScale = BlueTexturee.transform.localScale;
