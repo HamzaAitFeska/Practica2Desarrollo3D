@@ -10,6 +10,7 @@ public class Button : MonoBehaviour
     public GameObject buttonLight;
     public AudioSource buttonPositive, buttonNegative;
 
+    int numberOfEntities = 0;
     bool l_ButtonOnAnimation = false;
     bool l_EntityIsOnButton = false;
     bool l_ButtonActive = false;
@@ -18,27 +19,40 @@ public class Button : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if ((other.tag == "Player" || other.tag == "CompanionCube") && !l_ButtonOnAnimation)
-        {
-            l_EntityIsOnButton = true;
-            SetButtonOnAnimation();
-            l_ButtonOnAnimation = true;
-            StartCoroutine(ButtonIsPressed());
+        {  
+            if (numberOfEntities <= 0)
+            {
+                l_EntityIsOnButton = true;
+                SetButtonOnAnimation();
+                l_ButtonOnAnimation = true;
+                StartCoroutine(ButtonIsPressed());
+                
+            }
+            numberOfEntities++;
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if ((other.tag == "Player" || other.tag =="CompanionCube"))
         {
-            l_EntityIsOnButton = false;
-            SetButtonOffAnimation();
-            buttonLight.SetActive(false);
-            if (l_ButtonActive)
+            if (numberOfEntities > 0)
             {
-                AudioController.instance.PlayOneShot(buttonNegative);
-                m_ButtonIsPressed = false;
+                numberOfEntities--;
             }
-            l_ButtonActive = false;
-            l_ButtonOnAnimation = false;
+            if (numberOfEntities <= 0)
+            {
+                l_EntityIsOnButton = false;
+                SetButtonOffAnimation();
+                buttonLight.SetActive(false);
+                if (l_ButtonActive)
+                {
+                    AudioController.instance.PlayOneShot(buttonNegative);
+                    m_ButtonIsPressed = false;
+                }
+                l_ButtonActive = false;
+                l_ButtonOnAnimation = false;
+            }
+            
         } 
     }
     public IEnumerator ButtonIsPressed()
