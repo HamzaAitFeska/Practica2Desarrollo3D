@@ -78,8 +78,11 @@ public class Turret : MonoBehaviour
         transform.localScale *= (_Portal.m_MirrorPortal.transform.localScale.x / _Portal.transform.localScale.x);
         m_Rigidbody.velocity = l_WorldVelocity;
         m_ExitPortal = _Portal.m_MirrorPortal;
-        
     }
-
+    void TurretAlarmSound()
+    {
+        AudioController.instance.PlayOneShot(AudioController.instance.turretAlert);
+        AudioController.instance.PlayOneShot(AudioController.instance.turretAlarmVoice[Random.Range(0, AudioController.instance.turretAlarmVoice.Length)]);
+    }
 }
     

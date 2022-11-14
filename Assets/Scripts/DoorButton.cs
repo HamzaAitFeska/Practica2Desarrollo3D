@@ -8,7 +8,7 @@ public class DoorButton : MonoBehaviour
     public AnimationClip m_DoorOpeningClip;
     public AnimationClip m_DoorClosingClip;
 
-    public AudioSource doorButtonOpening, doorButtonClosing;
+    public AudioSource doorButtonOpening, doorButtonClosing, doorMechanism;
 
     public GameObject m_Button;
     Button button;
@@ -25,6 +25,7 @@ public class DoorButton : MonoBehaviour
             doorIsOpen = true;
             SetDoorOpeningAnimation();
             AudioController.instance.PlayOneShot(doorButtonOpening);
+            AudioController.instance.PlayOneShot(doorMechanism);
         }
         if (!button.m_ButtonIsPressed && doorIsOpen)
         {
