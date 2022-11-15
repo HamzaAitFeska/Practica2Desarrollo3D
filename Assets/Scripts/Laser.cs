@@ -6,12 +6,12 @@ public class Laser : MonoBehaviour
     public LayerMask m_CollisionLayerMask;
     public float m_MaxDistance;
 
-    public GameObject m_Turret;
-    Turret turret;
+    //public GameObject m_Turret;
+    //Turret turret;
 
     public void Start()
     {
-        turret = m_Turret.GetComponent<Turret>();
+        //turret = m_Turret.GetComponent<Turret>();
     }
     public void Shoot()
     {
@@ -24,27 +24,23 @@ public class Laser : MonoBehaviour
             {
                 l_RayvastHit.collider.GetComponent<RefractionVube>().Createfraction();
             }
-            if(l_RayvastHit.collider.tag == "Portal" && l_RayvastHit.collider.GetComponent<Portal>() == FPSPlayerController.instance.m_BluePortal)
+            if(l_RayvastHit.collider.tag == "Portal" && l_RayvastHit.collider.GetComponent<Portal>() == FPSPlayerController.instance.m_BluePortal && Turret.instance.m_Laser.m_LineRenderer.gameObject.activeInHierarchy)
             {
                 FPSPlayerController.instance.m_OrangePortal.GetComponent<Portal>().Createfraction();
             }
-            if (l_RayvastHit.collider.tag == "Portal" && l_RayvastHit.collider.GetComponent<Portal>() == FPSPlayerController.instance.m_OrangePortal)
+            if (l_RayvastHit.collider.tag == "Portal" && l_RayvastHit.collider.GetComponent<Portal>() == FPSPlayerController.instance.m_OrangePortal && Turret.instance.m_Laser.m_LineRenderer.gameObject.activeInHierarchy)
             {
                 FPSPlayerController.instance.m_BluePortal.GetComponent<Portal>().Createfraction();
             }
+            if(l_RayvastHit.collider.tag == "Player")
+            {
+                PlayerLife.instance.currentLife = 0;
+                }
         }
         m_LineRenderer.SetPosition(1, new Vector3(0, 0, l_laserDistance));
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            PlayerLife.instance.currentLife = 0;
-            turret.TurretAlarmSound();
-        }
-    }
-
+   
     void Teleport()
     {
 

@@ -19,6 +19,7 @@ public class PlayerLife : MonoBehaviour
     public bool m_IsDead;
     public bool m_PlayedOnce;
     public bool m_IsCreated;
+    public Turret m_turret;
     [Header("GameOver")]
     public GameObject GameOver;
     public GameObject UI;
@@ -58,6 +59,7 @@ public class PlayerLife : MonoBehaviour
         if (m_IsDead && !m_PlayedOnce)
         {
             AudioController.instance.PlayOneShot(AudioController.instance.playerDeath);
+            m_turret.TurretAlarmSound();
             m_PlayedOnce = true;
         }
     }
@@ -78,6 +80,7 @@ public class PlayerLife : MonoBehaviour
         yield return new WaitForSeconds(1f);
         currentLife = maxLife;
         transform.position = CheckpointPosition;
+        FPSPlayerController.instance.ProhibitedTexture.SetActive(false);
         FPSPlayerController.instance.m_Shooting = false;
         FPSPlayerController.instance.m_Yaw = CheckPointYaw;
         FPSPlayerController.instance.m_Pitch = CheckpoinPitch;

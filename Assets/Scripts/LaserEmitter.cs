@@ -31,9 +31,9 @@ public class LaserEmitter : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("LaserReceptor"))
-        {
+        //if (other.CompareTag("LaserReceptor"))
+        //{
             
-        }
+        //}
     }
 }

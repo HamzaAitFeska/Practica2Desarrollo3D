@@ -5,25 +5,37 @@ using UnityEngine;
 public class Destroying : MonoBehaviour
 {
     // Start is called before the first frame update
-
-    /*private void OnCollisionEnter(Collision collision)
+    public Companion m_companion;
+    public Turret m_Turret;
+    public RefractionVube m_refractionVube;
+    private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("CompanionCube"))
         {
-            Destroy(Companion.instance.m_Rigidbody.gameObject, 0.1f);
+            Destroy(m_companion.gameObject);
         }
-    }*/
 
-    private void OnTriggerEnter(Collider other)
+        if (collision.collider.CompareTag("Turret"))
+        {
+            Destroy(m_Turret.gameObject);
+        }
+
+        if (collision.collider.CompareTag("RefractionCube"))
+        {
+            Destroy(m_refractionVube.gameObject);
+        }
+    }
+
+    /*private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "CompanionCube")
         {
-            Destroy(Companion.instance.m_Rigidbody.gameObject, 0.1f);
+            Destroy(Companion.instance.gameObject, 0.1f);
         }
 
         if(other.tag == "Turret")
         {
-            Destroy(Turret.instance.m_Rigidbody.gameObject, 0.1f);
+            Destroy(Turret.instance.gameObject, 0.1f);
         }
-    }
+    }*/
 }

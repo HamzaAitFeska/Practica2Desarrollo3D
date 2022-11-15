@@ -6,7 +6,7 @@ public class Turret : MonoBehaviour
     // Start is called before the first frame update
     public Laser m_Laser;
     public float m_AngleLaserActive;
-    [SerializeField] public Rigidbody m_Rigidbody;
+    public Rigidbody m_Rigidbody;
     bool m_IsAttached = false;
     public float m_OffsetPortal = 1.5f;
     Portal m_ExitPortal = null;
@@ -67,6 +67,8 @@ public class Turret : MonoBehaviour
         {
             m_Laser.Shoot();
         }
+
+                
     }
 
     public void Teleport(Portal _Portal)

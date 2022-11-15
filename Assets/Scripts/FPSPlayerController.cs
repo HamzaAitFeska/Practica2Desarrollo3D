@@ -327,6 +327,17 @@ public class FPSPlayerController : MonoBehaviour
                 m_ObjectAttached.GetComponent<Turret>().TurretPickupSound();
             }
 
+            if (l_raycastHit.collider.tag == "RefractionCube")
+            {
+                m_AttachingObject = true;
+                m_ObjectAttached = l_raycastHit.collider.GetComponent<Rigidbody>();
+                m_ObjectAttached.GetComponent<RefractionVube>().SetAttached(true);
+                m_ObjectAttached.isKinematic = true;
+                m_AttachingObjectStartRotation = l_raycastHit.collider.transform.rotation;
+                AudioController.instance.PlayOneShot(AudioController.instance.pickupObject);
+                AudioController.instance.Play(AudioController.instance.pickupObjectLoop);
+            }
+
 
         }
     }
@@ -349,6 +360,17 @@ public class FPSPlayerController : MonoBehaviour
             m_ObjectAttached.isKinematic = false;
             m_ObjectAttached.AddForce(m_PitchCotroller.forward * force);
             m_ObjectAttached.GetComponent<Companion>().SetAttached(false);
+            m_ObjectAttached = null;
+            AudioController.instance.PlayOneShot(AudioController.instance.dropObject);
+            AudioController.instance.Stop(AudioController.instance.pickupObjectLoop);
+        }
+
+        if (m_ObjectAttached != null && m_ObjectAttached.tag == "RefractionCube")
+        {
+            m_ObjectAttached.transform.SetParent(null);
+            m_ObjectAttached.isKinematic = false;
+            m_ObjectAttached.AddForce(m_PitchCotroller.forward * force);
+            m_ObjectAttached.GetComponent<RefractionVube>().SetAttached(false);
             m_ObjectAttached = null;
             AudioController.instance.PlayOneShot(AudioController.instance.dropObject);
             AudioController.instance.Stop(AudioController.instance.pickupObjectLoop);
