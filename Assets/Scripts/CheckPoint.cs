@@ -11,7 +11,7 @@ public class CheckPoint : MonoBehaviour
             PlayerLife.instance.CheckpointPosition = transform.position;
             PlayerLife.instance.CheckpoinPitch = FPSPlayerController.instance.m_Pitch;
             PlayerLife.instance.CheckPointYaw = FPSPlayerController.instance.m_Yaw;
-            //AudioController.instance.PlayOneShot(AudioController.instance.uiWarning);
+            AudioController.instance.PlayOneShot(AudioController.instance.checkpointReached);
             Destroy(gameObject);
         }
     }

@@ -12,9 +12,10 @@ public class Turret : MonoBehaviour
     Portal m_ExitPortal = null;
     public static Turret instance;
 
-    public AudioSource turretAlert, turretDead;
+    public AudioSource turretAlert, turretDisabled, idleLoop;
     public AudioSource[] turretAlarmVoice;
     public AudioSource[] turretPickupVoice;
+    public AudioSource[] turretDeadVoice;
     void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
@@ -91,6 +92,12 @@ public class Turret : MonoBehaviour
     public void TurretPickupSound()
     {
         AudioController.instance.PlayOneShot(turretPickupVoice[Random.Range(0, turretPickupVoice.Length)]);
+    }
+    public void TurretDeathSound()
+    {
+        AudioController.instance.Stop(idleLoop);
+        AudioController.instance.PlayOneShot(turretDisabled); 
+        AudioController.instance.PlayOneShot(turretDeadVoice[Random.Range(0, turretDeadVoice.Length)]);
     }
 }
     

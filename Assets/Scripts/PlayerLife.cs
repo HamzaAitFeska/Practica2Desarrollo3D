@@ -48,7 +48,6 @@ public class PlayerLife : MonoBehaviour
             FPSPlayerController.instance.m_characterController.enabled = false;
             UI.SetActive(false);
             m_IsDead = true;
-           
         }
 
               
@@ -56,11 +55,11 @@ public class PlayerLife : MonoBehaviour
 
     private void LateUpdate()
     {
-        /*if (m_IsDead && !m_PlayedOnce)
+        if (m_IsDead && !m_PlayedOnce)
         {
             AudioController.instance.PlayOneShot(AudioController.instance.playerDeath);
             m_PlayedOnce = true;
-        }*/
+        }
     }
 
     public void DamagePlayer()
