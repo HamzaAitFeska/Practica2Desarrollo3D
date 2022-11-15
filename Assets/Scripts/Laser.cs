@@ -5,6 +5,7 @@ public class Laser : MonoBehaviour
     public LineRenderer m_LineRenderer;
     public LayerMask m_CollisionLayerMask;
     public float m_MaxDistance;
+    
 
     //public GameObject m_Turret;
     //Turret turret;
@@ -32,10 +33,16 @@ public class Laser : MonoBehaviour
             {
                 FPSPlayerController.instance.m_BluePortal.GetComponent<Portal>().Createfraction();
             }
-            if(l_RayvastHit.collider.tag == "Player")
+            if (l_RayvastHit.collider.tag == "Player")
             {
                 PlayerLife.instance.currentLife = 0;
-                }
+            }
+            if(l_RayvastHit.collider.tag == "Turret")
+            {
+                Destroy(l_RayvastHit.collider.GetComponent<Turret>().gameObject);
+            }
+
+
         }
         m_LineRenderer.SetPosition(1, new Vector3(0, 0, l_laserDistance));
     }
