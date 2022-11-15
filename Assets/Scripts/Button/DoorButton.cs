@@ -37,11 +37,9 @@ public class DoorButton : MonoBehaviour
     void SetDoorOpeningAnimation()
     {
         m_Animation.CrossFadeQueued(m_DoorOpeningClip.name);
-        
     }
     void SetDoorClosingAnimation()
     {
         m_Animation.CrossFadeQueued(m_DoorClosingClip.name);
-       
     }
 }

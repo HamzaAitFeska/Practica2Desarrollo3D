@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3162860556723914977}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &5538750587267062216
 AudioSource:
@@ -281,8 +281,8 @@ Transform:
   m_LocalPosition: {x: 18, y: 10.343903, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 7257393419006436431}
   - {fileID: 3674990712490903278}
+  - {fileID: 7257393419006436431}
   - {fileID: 838731612299496366}
   m_Father: {fileID: 5086282457638467728}
   m_RootOrder: 6
@@ -297,7 +297,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5086282457203081773}
   - component: {fileID: 5086282457203081810}
-  - component: {fileID: 2152510992236932276}
+  - component: {fileID: 106294793289578052}
   m_Layer: 0
   m_Name: Elevator
   m_TagString: Untagged
@@ -339,7 +339,7 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &2152510992236932276
+--- !u!114 &106294793289578052
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -348,16 +348,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 5086282457203081772}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf38ec83dff533f4f8acedc9dca060b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 29ffc2118a235814dbca5299a638e798, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Animation: {fileID: 0}
-  m_DoorOpeningClip: {fileID: 7400000, guid: f257116bd0ecb044bbfdab7596217d95, type: 2}
-  m_DoorClosingClip: {fileID: 7400000, guid: 487e66f4c68061a4ab18d34d16729784, type: 2}
-  doorButtonOpening: {fileID: 8694886461761275730}
-  doorButtonClosing: {fileID: 5538750587267062216}
-  doorMechanism: {fileID: 6848173250171157138}
+  m_Animation: {fileID: 5086282457203081810}
+  m_ElevatorDownClip: {fileID: 7400000, guid: f257116bd0ecb044bbfdab7596217d95, type: 2}
+  m_ElevatorUpClip: {fileID: 7400000, guid: 487e66f4c68061a4ab18d34d16729784, type: 2}
+  elevatorButtonDown: {fileID: 8694886461761275730}
+  elevatorButtonUp: {fileID: 5538750587267062216}
+  elevatorMechanism: {fileID: 6848173250171157138}
   m_Button: {fileID: 0}
+  m_BluePortal: {fileID: 0}
+  m_OrangePortal: {fileID: 0}
 --- !u!1 &5086282457638467731
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,7 +446,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3162860556723914977}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &8694886461761275730
 AudioSource:

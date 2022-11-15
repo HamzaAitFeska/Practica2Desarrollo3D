@@ -6,6 +6,13 @@ public class Laser : MonoBehaviour
     public LayerMask m_CollisionLayerMask;
     public float m_MaxDistance;
 
+    public GameObject m_Turret;
+    Turret turret;
+
+    public void Start()
+    {
+        turret = m_Turret.GetComponent<Turret>();
+    }
     public void Shoot()
     {
         float l_laserDistance = m_MaxDistance;
@@ -34,10 +41,8 @@ public class Laser : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             PlayerLife.instance.currentLife = 0;
+            turret.TurretAlarmSound();
         }
-
-        
-
     }
 
     void Teleport()

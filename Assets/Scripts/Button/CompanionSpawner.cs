@@ -8,18 +8,27 @@ public class CompanionSpawner : MonoBehaviour
     public Transform m_SpawnPosition;
     public GameObject m_Button;
     Button button;
-    // Start is called before the first frame update
 
-    bool doorIsOpen = false;
+    bool buttonIsActive = false;
+
     private void Start()
     {
         button = m_Button.GetComponent<Button>();
     }
     private void Update()
     {
-        if (button.m_ButtonIsPressed)
+        if (button != null)
         {
-            GameObject.Instantiate(m_prefabCompanion, m_SpawnPosition.position, m_SpawnPosition.rotation);
+            if (button.m_ButtonIsPressed && !buttonIsActive)
+            {
+                GameObject.Instantiate(m_prefabCompanion, m_SpawnPosition.position, m_SpawnPosition.rotation);
+                buttonIsActive = true;
+            }
+            if (!button.m_ButtonIsPressed && buttonIsActive)
+            {
+                buttonIsActive = false;
+            }
         }
+        
     }
 }

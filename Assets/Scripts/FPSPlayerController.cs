@@ -324,6 +324,7 @@ public class FPSPlayerController : MonoBehaviour
                 m_AttachingObjectStartRotation = l_raycastHit.collider.transform.rotation;
                 AudioController.instance.PlayOneShot(AudioController.instance.pickupObject);
                 AudioController.instance.Play(AudioController.instance.pickupObjectLoop);
+                m_ObjectAttached.GetComponent<Turret>().TurretPickupSound();
             }
 
 

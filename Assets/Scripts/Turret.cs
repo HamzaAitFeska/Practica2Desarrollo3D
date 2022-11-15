@@ -11,6 +11,10 @@ public class Turret : MonoBehaviour
     public float m_OffsetPortal = 1.5f;
     Portal m_ExitPortal = null;
     public static Turret instance;
+
+    public AudioSource turretAlert, turretDead;
+    public AudioSource[] turretAlarmVoice;
+    public AudioSource[] turretPickupVoice;
     void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
@@ -79,10 +83,14 @@ public class Turret : MonoBehaviour
         m_Rigidbody.velocity = l_WorldVelocity;
         m_ExitPortal = _Portal.m_MirrorPortal;
     }
-    void TurretAlarmSound()
+    public void TurretAlarmSound()
     {
-        AudioController.instance.PlayOneShot(AudioController.instance.turretAlert);
-        AudioController.instance.PlayOneShot(AudioController.instance.turretAlarmVoice[Random.Range(0, AudioController.instance.turretAlarmVoice.Length)]);
+        AudioController.instance.PlayOneShot(turretAlert);
+        AudioController.instance.PlayOneShot(turretAlarmVoice[Random.Range(0, turretAlarmVoice.Length)]);
+    }
+    public void TurretPickupSound()
+    {
+        AudioController.instance.PlayOneShot(turretPickupVoice[Random.Range(0, turretPickupVoice.Length)]);
     }
 }
     
