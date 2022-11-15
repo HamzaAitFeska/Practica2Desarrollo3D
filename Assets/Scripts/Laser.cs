@@ -17,6 +17,14 @@ public class Laser : MonoBehaviour
             {
                 l_RayvastHit.collider.GetComponent<RefractionVube>().Createfraction();
             }
+            if(l_RayvastHit.collider.tag == "Portal" && l_RayvastHit.collider.GetComponent<Portal>() == FPSPlayerController.instance.m_BluePortal)
+            {
+                FPSPlayerController.instance.m_OrangePortal.GetComponent<Portal>().Createfraction();
+            }
+            if (l_RayvastHit.collider.tag == "Portal" && l_RayvastHit.collider.GetComponent<Portal>() == FPSPlayerController.instance.m_OrangePortal)
+            {
+                FPSPlayerController.instance.m_BluePortal.GetComponent<Portal>().Createfraction();
+            }
         }
         m_LineRenderer.SetPosition(1, new Vector3(0, 0, l_laserDistance));
     }
@@ -27,6 +35,14 @@ public class Laser : MonoBehaviour
         {
             PlayerLife.instance.currentLife = 0;
         }
+
+        
+
+    }
+
+    void Teleport()
+    {
+
     }
 }
     

@@ -12,9 +12,15 @@ public class Portal : MonoBehaviour
     public float m_MinValidDistance;
     public float m_MaxValidDistance;
     public float m_MinDotValidAngle;
-    //public GameObject Offset;
     public AudioSource[] portalOpening;
+    bool m_RefractionEnable = false;
+    public Laser m_Laser;
 
+    private void Update()
+    {
+        m_Laser.m_LineRenderer.gameObject.SetActive(m_RefractionEnable);
+        m_RefractionEnable = false;
+    }
     private void LateUpdate()
     {
         Vector3 l_WorldPosiition = m_Player.m_Camera.transform.position;
@@ -95,5 +101,15 @@ public class Portal : MonoBehaviour
     void RandomizeOpenSound()
     {
         AudioController.instance.PlayOneShot(portalOpening[Random.Range(0, portalOpening.Length)]);
+    }
+
+    public void Createfraction()
+    {
+        if (m_RefractionEnable)
+        {
+            return;
+        }
+        m_RefractionEnable = true;
+        m_Laser.Shoot();
     }
 }
