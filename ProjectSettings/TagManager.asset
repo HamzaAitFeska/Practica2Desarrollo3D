@@ -12,6 +12,7 @@ TagManager:
   - RefractionCube
   - Turret
   - NotDrawableWall
+  - LaserEmitter
   layers:
   - Default
   - TransparentFX
