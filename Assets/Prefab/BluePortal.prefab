@@ -926,7 +926,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 127
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 1bcdf7098207e9848bb5ac140bda61b4, type: 2}
   m_TargetDisplay: 0
@@ -1247,6 +1247,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_MaxDistance: 250
+  m_Turret: {fileID: 0}
 --- !u!1 &8392896483860909086
 GameObject:
   m_ObjectHideFlags: 0
