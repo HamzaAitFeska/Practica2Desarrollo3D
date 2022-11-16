@@ -512,25 +512,25 @@ public class FPSPlayerController : MonoBehaviour
 
     private void ScrollWheel()
     {
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f && OrangeTexturee.transform.localScale.x < 1.25f && OrangeTexturee.activeInHierarchy)
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f && OrangeTexturee.transform.localScale.x < 2.0f && OrangeTexturee.activeInHierarchy)
         {
-            OrangeTexturee.transform.localScale += new Vector3(0.25f, 0.25f, 0);
+            OrangeTexturee.transform.localScale += new Vector3(OrangeTexturee.transform.localScale.x, OrangeTexturee.transform.localScale.y, 0);
             
         }
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0f && OrangeTexturee.transform.localScale.x > 0.75f && OrangeTexturee.activeInHierarchy)
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0f && OrangeTexturee.transform.localScale.x > 0.5f && OrangeTexturee.activeInHierarchy)
         {
-            OrangeTexturee.transform.localScale -= new Vector3(0.25f, 0.25f, 0);
-            
-        }
-
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f && BlueTexturee.transform.localScale.x < 1.25f && BlueTexturee.activeInHierarchy)
-        {
-            BlueTexturee.transform.localScale += new Vector3(0.25f, 0.25f, 0);
+            OrangeTexturee.transform.localScale -= new Vector3(OrangeTexturee.transform.localScale.x/2, OrangeTexturee.transform.localScale.y/2, 0);
 
         }
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0f &&  BlueTexturee.transform.localScale.x > 0.75f && BlueTexturee.activeInHierarchy)
+
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f && BlueTexturee.transform.localScale.x < 2.0f && BlueTexturee.activeInHierarchy)
         {
-            BlueTexturee.transform.localScale -= new Vector3(0.25f, 0.25f, 0);
+            BlueTexturee.transform.localScale += new Vector3(BlueTexturee.transform.localScale.x, BlueTexturee.transform.localScale.y, 0);
+
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0f &&  BlueTexturee.transform.localScale.x > 0.5f && BlueTexturee.activeInHierarchy)
+        {
+            BlueTexturee.transform.localScale -= new Vector3(BlueTexturee.transform.localScale.x / 2, BlueTexturee.transform.localScale.y / 2, 0);
 
         }
 
