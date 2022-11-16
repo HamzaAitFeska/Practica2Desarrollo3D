@@ -2,7 +2,7 @@
 public class RefractionVube : MonoBehaviour
 {
     bool m_RefractionEnable = false;
-    public Laser m_Laser;
+    public LaserEmitter m_Laser;
     bool m_IsAttached = false;
     public Rigidbody m_Rigidbody;
     public float m_OffsetPortal = 1.5f;

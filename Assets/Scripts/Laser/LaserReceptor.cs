@@ -10,23 +10,19 @@ public class LaserReceptor : MonoBehaviour
 
     public AudioSource laserReceptorIdle;
 
-    public GameObject m_Laser;
-    LaserEmitter laserEmitter;
-
     bool laserReceptorIsActive = false;
-    private void Start()
-    {
-        laserEmitter = m_Laser.GetComponent<LaserEmitter>();
-    }
+
+    public bool ReceptorIsActive;
+
     private void Update()
     {
-        if (laserEmitter.ReceptorIsActive && !laserReceptorIsActive)
+        if (ReceptorIsActive && !laserReceptorIsActive)
         {
             laserReceptorIsActive = true;
             SetLaserReceptorStartingAnimation();
             AudioController.instance.Play(laserReceptorIdle);
         }
-        if (!laserEmitter.ReceptorIsActive && laserReceptorIsActive)
+        if (!ReceptorIsActive && laserReceptorIsActive)
         {
             laserReceptorIsActive = false;
             StopLaserReceptorActiveAnimation();

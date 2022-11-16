@@ -19,7 +19,6 @@ public class PlayerLife : MonoBehaviour
     public bool m_IsDead;
     public bool m_PlayedOnce;
     public bool m_IsCreated;
-    public Turret m_turret;
     [Header("GameOver")]
     public GameObject GameOver;
     public GameObject UI;
@@ -59,7 +58,6 @@ public class PlayerLife : MonoBehaviour
         if (m_IsDead && !m_PlayedOnce)
         {
             AudioController.instance.PlayOneShot(AudioController.instance.playerDeath);
-            m_turret.TurretAlarmSound();
             m_PlayedOnce = true;
         }
     }

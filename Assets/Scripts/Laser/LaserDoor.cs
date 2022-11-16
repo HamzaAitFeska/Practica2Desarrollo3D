@@ -10,24 +10,24 @@ public class LaserDoor : MonoBehaviour
 
     public AudioSource doorButtonOpening, doorButtonClosing, doorMechanism;
 
-    public GameObject m_Laser;
-    LaserEmitter laserEmitter;
+    public GameObject m_LaserReceptor;
+    LaserReceptor laser;
 
     bool doorIsOpen = false;
     private void Start()
     {
-        laserEmitter = m_Laser.GetComponent<LaserEmitter>();
+        laser = m_LaserReceptor.GetComponent<LaserReceptor>();
     }
     private void Update()
     {
-        if (laserEmitter.ReceptorIsActive && !doorIsOpen)
+        if (laser.ReceptorIsActive && !doorIsOpen)
         {
             doorIsOpen = true;
             SetDoorOpeningAnimation();
             AudioController.instance.PlayOneShot(doorButtonOpening);
             AudioController.instance.PlayOneShot(doorMechanism);
         }
-        if (!laserEmitter.ReceptorIsActive && doorIsOpen)
+        if (!laser.ReceptorIsActive && doorIsOpen)
         {
             doorIsOpen = false;
             SetDoorClosingAnimation();

@@ -1382,6 +1382,7 @@ MonoBehaviour:
   - {fileID: 833932675233218329}
   - {fileID: 3055443912370206036}
   - {fileID: 677411576909523921}
+  m_TurretIsAlive: 1
 --- !u!1 &4157378154667834290
 GameObject:
   m_ObjectHideFlags: 0
@@ -1777,7 +1778,7 @@ GameObject:
   - component: {fileID: 4157378155364320928}
   m_Layer: 6
   m_Name: Laser
-  m_TagString: Untagged
+  m_TagString: Laser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

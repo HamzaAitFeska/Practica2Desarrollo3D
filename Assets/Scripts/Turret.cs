@@ -16,24 +16,17 @@ public class Turret : MonoBehaviour
     public AudioSource[] turretAlarmVoice;
     public AudioSource[] turretPickupVoice;
     public AudioSource[] turretDeadVoice;
+
+    public bool m_TurretIsAlive = true;
     void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
         instance = this;
     }
-
-    public void SetAttached(bool Attached)
-    {
-        m_IsAttached = Attached;
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        TurretLaserRange();        
-        
+        if (m_TurretIsAlive) TurretLaserRange();
     }
-
     public void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Portal") && !m_IsAttached)
@@ -45,8 +38,16 @@ public class Turret : MonoBehaviour
 
             }
         }
-    }
+        if (other.CompareTag("Laser") && !m_IsAttached)
+        {
+            Portal l_Portal = other.GetComponent<Portal>();
+            if (l_Portal != m_ExitPortal)
+            {
+                Teleport(l_Portal);
 
+            }
+        }
+    }
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Portal")
@@ -57,18 +58,28 @@ public class Turret : MonoBehaviour
             }
         }
     }
-
-
+    public void SetAttached(bool Attached)
+    {
+        m_IsAttached = Attached;
+    }
     void TurretLaserRange()
     {
-        bool l_LaserAlive = Vector3.Dot(transform.up, Vector3.up) > Mathf.Cos(m_AngleLaserActive * Mathf.Deg2Rad);
-        m_Laser.m_LineRenderer.gameObject.SetActive(l_LaserAlive);
-        if (l_LaserAlive)
+        bool l_LaserAlive = Vector3.Dot(transform.up, Vector3.up) > Mathf.Cos(m_AngleLaserActive * Mathf.Deg2Rad); 
+        if (l_LaserAlive || m_IsAttached)
         {
             m_Laser.Shoot();
+            m_Laser.m_LineRenderer.gameObject.SetActive(true);
         }
-
-                
+        else if (!m_IsAttached)
+        {
+            TurretDeath();
+        }          
+    }
+    public void TurretDeath()
+    {
+        m_Laser.m_LineRenderer.gameObject.SetActive(false);
+        m_TurretIsAlive = false;
+        TurretDeathSound();
     }
 
     public void Teleport(Portal _Portal)
@@ -93,8 +104,11 @@ public class Turret : MonoBehaviour
     }
     public void TurretPickupSound()
     {
-        AudioController.instance.PlayOneShot(turretPickupVoice[Random.Range(0, turretPickupVoice.Length)]);
-    }
+        if (m_TurretIsAlive)
+        {
+            AudioController.instance.PlayOneShot(turretPickupVoice[Random.Range(0, turretPickupVoice.Length)]);
+        }
+    }     
     public void TurretDeathSound()
     {
         AudioController.instance.Stop(idleLoop);

@@ -6,7 +6,6 @@ public class LaserEmitter : MonoBehaviour
     public LayerMask m_CollisionLayerMask;
     public float m_MaxDistance;
 
-    public bool ReceptorIsActive;
     public void Shoot()
     {
         float l_laserDistance = m_MaxDistance;
@@ -26,11 +25,6 @@ public class LaserEmitter : MonoBehaviour
             {
                 FPSPlayerController.instance.m_BluePortal.GetComponent<Portal>().Createfraction();
             }
-            if (l_RayvastHit.collider.tag == "LaserReceptor")
-            {
-                ReceptorIsActive = true;
-            }
-            else ReceptorIsActive = false;
         }
         m_LineRenderer.SetPosition(1, new Vector3(0, 0, l_laserDistance));
     }
