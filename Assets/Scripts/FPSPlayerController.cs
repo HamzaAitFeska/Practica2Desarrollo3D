@@ -30,7 +30,6 @@ public class FPSPlayerController : MonoBehaviour
     public KeyCode m_DownKeyCode;
     public KeyCode m_JumpKeyCode = KeyCode.Space;
     public KeyCode m_RunKeyCode = KeyCode.LeftShift;
-    public KeyCode m_ThrowObject = KeyCode.G;
     public KeyCode m_PickObject = KeyCode.E;
     public KeyCode m_DebugLockAngleKeyCode = KeyCode.I;
     public KeyCode m_DebugLockKeyCode = KeyCode.O;
@@ -39,7 +38,6 @@ public class FPSPlayerController : MonoBehaviour
     public Camera m_Camera;
     public Camera m_CameraWeapon;
     public float m_NormalMovementFOV=60.0f;
-    public float m_RunMovementFOV=75.0f;
     //public GameObject PrefabBulletHole;
     public bool m_Shooting;
     public bool m_IsReloading;
@@ -148,15 +146,6 @@ public class FPSPlayerController : MonoBehaviour
         //Jump if SpaceBar is pressed down and player is on ground
         if (Input.GetKeyDown(m_JumpKeyCode) && m_AirTime < 0.1f)
             m_VerticalSpeed = m_JumpSpeed; 
-        //Run if shift is pressed
-        if (Input.GetKey(m_RunKeyCode) && m_Direction != Vector3.zero & !m_IsReloading)
-        {
-            //l_Speed = m_PlayerSpeed * m_FastSpeedMultiplier;
-            l_FOV = m_RunMovementFOV;
-            //SetRunWeaponAnimation();
-            m_IsRunning = true;
-            //l_FOV = m_RunMovementFOV;
-        }
         if (Input.GetKeyUp(m_RunKeyCode))
         {
             //SetIdleWeaponWithRunAnimation();

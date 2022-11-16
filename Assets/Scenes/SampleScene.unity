@@ -35243,7 +35243,7 @@ Transform:
   - {fileID: 1211220134}
   - {fileID: 2028132023}
   m_Father: {fileID: 1961988464}
-  m_RootOrder: 9
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1258107504 stripped
 Transform:
@@ -36703,7 +36703,7 @@ Transform:
   m_Children:
   - {fileID: 1273562991}
   m_Father: {fileID: 1961988464}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1298575638 stripped
 MonoBehaviour:
@@ -55476,15 +55476,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2184905985369214332, guid: 126aa4b5831d3b84cae0574e86cc2228, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.507
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2184905985369214332, guid: 126aa4b5831d3b84cae0574e86cc2228, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 19.38
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2184905985369214332, guid: 126aa4b5831d3b84cae0574e86cc2228, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -37
+      value: -34
       objectReference: {fileID: 0}
     - target: {fileID: 2184905985369214332, guid: 126aa4b5831d3b84cae0574e86cc2228, type: 3}
       propertyPath: m_LocalRotation.w
@@ -60385,6 +60385,8 @@ Transform:
   m_Children:
   - {fileID: 1685122110}
   - {fileID: 265349363}
+  - {fileID: 1256067529}
+  - {fileID: 2040753010}
   - {fileID: 1939480481}
   - {fileID: 1026163617}
   - {fileID: 280959708}
@@ -60392,10 +60394,8 @@ Transform:
   - {fileID: 768239117}
   - {fileID: 270161447}
   - {fileID: 894264478}
-  - {fileID: 1256067529}
-  - {fileID: 1495029748}
-  - {fileID: 2040753010}
   - {fileID: 1298057217}
+  - {fileID: 1495029748}
   - {fileID: 1401816783}
   - {fileID: 781575301}
   - {fileID: 1071769732}
@@ -62255,7 +62255,7 @@ Transform:
   m_LocalScale: {x: 0.7715, y: 1, z: 0.7998135}
   m_Children: []
   m_Father: {fileID: 1961988464}
-  m_RootOrder: 11
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2040753011
 BoxCollider:
