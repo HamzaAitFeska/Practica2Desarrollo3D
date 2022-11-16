@@ -35,7 +35,7 @@ public class Laser : MonoBehaviour
             {
                 FPSPlayerController.instance.m_BluePortal.GetComponent<Portal>().Createfraction();
             }
-            if (l_RayvastHit.collider.tag == "Player")
+            if (l_RayvastHit.collider.tag == "Player" && m_LineRenderer.tag == "Laser")
             {
                 PlayerLife.instance.currentLife = 0;
                 turret.TurretAlarmSound();
