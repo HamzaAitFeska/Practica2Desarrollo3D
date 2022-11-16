@@ -28,7 +28,6 @@ public class RefractionVube : MonoBehaviour
             return;
         }
         m_RefractionEnable = true;
-        m_Laser.Shoot();
     }
 
     public void OnTriggerEnter(Collider other)

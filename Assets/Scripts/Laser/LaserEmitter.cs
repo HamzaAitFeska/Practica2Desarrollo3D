@@ -5,7 +5,10 @@ public class LaserEmitter : MonoBehaviour
     public LineRenderer m_LineRenderer;
     public LayerMask m_CollisionLayerMask;
     public float m_MaxDistance;
-
+    void Update()
+    {
+        Shoot();
+    }
     public void Shoot()
     {
         float l_laserDistance = m_MaxDistance;
@@ -15,7 +18,7 @@ public class LaserEmitter : MonoBehaviour
             l_laserDistance = Vector3.Distance(m_LineRenderer.transform.position, l_RayvastHit.point);
             if (l_RayvastHit.collider.tag == "RefractionCube")
             {
-                l_RayvastHit.collider.GetComponent<RefractionVube>().Createfraction();
+                l_RayvastHit.collider.GetComponent<RefractionVube>().Createfraction();  
             }
             if (l_RayvastHit.collider.tag == "Portal" && l_RayvastHit.collider.GetComponent<Portal>() == FPSPlayerController.instance.m_BluePortal)
             {
@@ -24,6 +27,10 @@ public class LaserEmitter : MonoBehaviour
             if (l_RayvastHit.collider.tag == "Portal" && l_RayvastHit.collider.GetComponent<Portal>() == FPSPlayerController.instance.m_OrangePortal)
             {
                 FPSPlayerController.instance.m_BluePortal.GetComponent<Portal>().Createfraction();
+            }
+            if (l_RayvastHit.collider.tag == "LaserReceptor")
+            {
+                l_RayvastHit.collider.GetComponent<LaserReceptor>().m_ReceptorIsActive = true;
             }
         }
         m_LineRenderer.SetPosition(1, new Vector3(0, 0, l_laserDistance));

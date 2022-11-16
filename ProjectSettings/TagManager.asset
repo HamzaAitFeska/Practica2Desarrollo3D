@@ -12,8 +12,8 @@ TagManager:
   - RefractionCube
   - Turret
   - NotDrawableWall
-  - LaserEmitter
   - Laser
+  - LaserReceptor
   layers:
   - Default
   - TransparentFX
@@ -23,7 +23,7 @@ TagManager:
   - UI
   - AttachCompanion
   - HideToPlayer
-  - 
+  - Player
   - 
   - 
   - 

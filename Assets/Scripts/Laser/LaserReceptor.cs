@@ -12,23 +12,24 @@ public class LaserReceptor : MonoBehaviour
 
     bool laserReceptorIsActive = false;
 
-    public bool ReceptorIsActive;
+    public bool m_ReceptorIsActive;
 
     private void Update()
     {
-        if (ReceptorIsActive && !laserReceptorIsActive)
+        if (m_ReceptorIsActive && !laserReceptorIsActive)
         {
             laserReceptorIsActive = true;
             SetLaserReceptorStartingAnimation();
             AudioController.instance.Play(laserReceptorIdle);
+            StartCoroutine(LaserReceptorIsActive());
         }
-        if (!ReceptorIsActive && laserReceptorIsActive)
+        if (!m_ReceptorIsActive && laserReceptorIsActive)
         {
             laserReceptorIsActive = false;
             StopLaserReceptorActiveAnimation();
-            SetLaserReceptorActiveAnimation();
             AudioController.instance.Stop(laserReceptorIdle);
         }
+        m_ReceptorIsActive = false;
     }
     public IEnumerator LaserReceptorIsActive()
     {

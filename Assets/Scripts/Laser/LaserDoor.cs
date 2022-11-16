@@ -20,14 +20,14 @@ public class LaserDoor : MonoBehaviour
     }
     private void Update()
     {
-        if (laser.ReceptorIsActive && !doorIsOpen)
+        if (laser.m_ReceptorIsActive && !doorIsOpen)
         {
             doorIsOpen = true;
             SetDoorOpeningAnimation();
             AudioController.instance.PlayOneShot(doorButtonOpening);
             AudioController.instance.PlayOneShot(doorMechanism);
         }
-        if (!laser.ReceptorIsActive && doorIsOpen)
+        if (!laser.m_ReceptorIsActive && doorIsOpen)
         {
             doorIsOpen = false;
             SetDoorClosingAnimation();
