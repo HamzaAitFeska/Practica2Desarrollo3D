@@ -11819,7 +11819,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4157378154523278630, guid: 55b9965cffec6c54885c2b00deb34400, type: 3}
   m_PrefabInstance: {fileID: 4157378155732401551}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 678638506}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e6e2c296a77ce40419cc7c9732f7b2ce, type: 3}
@@ -16776,6 +16776,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4151842941387702, guid: 1123dde5e341fcd4b8c6e5c6cdd68e21, type: 3}
   m_PrefabInstance: {fileID: 677979893}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &678638506 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4157378154523278634, guid: 55b9965cffec6c54885c2b00deb34400, type: 3}
+  m_PrefabInstance: {fileID: 4157378155732401551}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &680462033
 PrefabInstance:
@@ -29814,7 +29819,7 @@ PrefabInstance:
     - target: {fileID: 4119803833770075381, guid: 2c26a8ee4a5178a459e18985ccf5c662, type: 3}
       propertyPath: m_Turret
       value: 
-      objectReference: {fileID: 1256067528}
+      objectReference: {fileID: 678638506}
     - target: {fileID: 4668684527903656886, guid: 2c26a8ee4a5178a459e18985ccf5c662, type: 3}
       propertyPath: m_PlayOnAwake
       value: 1
@@ -65503,7 +65508,7 @@ PrefabInstance:
     - target: {fileID: 4119803833770075381, guid: 2c26a8ee4a5178a459e18985ccf5c662, type: 3}
       propertyPath: m_Turret
       value: 
-      objectReference: {fileID: 1256067528}
+      objectReference: {fileID: 678638506}
     - target: {fileID: 4668684527903656886, guid: 2c26a8ee4a5178a459e18985ccf5c662, type: 3}
       propertyPath: m_PlayOnAwake
       value: 1
