@@ -220,7 +220,7 @@ public class FPSPlayerController : MonoBehaviour
 
         
 
-        if(Input.GetMouseButtonDown(0) && CanAttachObject())
+        if((Input.GetKeyDown(m_PickObject)) && CanAttachObject())
         {
             AttachObject();  
         }
@@ -239,7 +239,7 @@ public class FPSPlayerController : MonoBehaviour
                 m_Shooting = true;
                 ThrowAttachedObject(m_ThrowAttachedObjectForce);
             }
-            if (Input.GetMouseButtonDown(1) && !CanAttachObject())
+            if ((Input.GetMouseButtonDown(1) || (Input.GetKeyDown(m_PickObject))) && !CanAttachObject())
             {
                 m_Shooting = true;
                 ThrowAttachedObject(0.0f);
