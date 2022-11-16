@@ -26,6 +26,7 @@ public class GameWin : MonoBehaviour
             UIWIN.SetActive(true);
             FPSPlayerController.instance.m_Shooting = true;
             FPSPlayerController.instance.m_AngleLocked = true;
+            FPSPlayerController.instance.m_AimLocked = true;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             FPSPlayerController.instance.m_characterController.enabled = false;

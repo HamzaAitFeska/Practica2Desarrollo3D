@@ -42,6 +42,7 @@ public class PlayerLife : MonoBehaviour
             GameOver.SetActive(true);
             FPSPlayerController.instance.m_Shooting = true;
             FPSPlayerController.instance.m_AngleLocked = true;
+            FPSPlayerController.instance.m_AimLocked = true;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             FPSPlayerController.instance.m_characterController.enabled = false;
@@ -84,6 +85,7 @@ public class PlayerLife : MonoBehaviour
         FPSPlayerController.instance.m_Pitch = CheckpoinPitch;
         FPSPlayerController.instance.m_characterController.enabled = true;
         FPSPlayerController.instance.m_AngleLocked = false;
+        FPSPlayerController.instance.m_AimLocked = false;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         m_IsCreated = true;
