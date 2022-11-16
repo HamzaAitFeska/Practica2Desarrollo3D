@@ -23,10 +23,10 @@ public class Laser : MonoBehaviour
         if (Physics.Raycast(new Ray(m_LineRenderer.transform.position, m_LineRenderer.transform.forward), out l_RayvastHit, m_MaxDistance, m_CollisionLayerMask.value) && !PlayerLife.instance.m_IsDead)
         {
             l_laserDistance = Vector3.Distance(m_LineRenderer.transform.position, l_RayvastHit.point);
-            /*if (l_RayvastHit.collider.tag == "RefractionCube")
+            if (l_RayvastHit.collider.tag == "RefractionCube")
             {
                 l_RayvastHit.collider.GetComponent<RefractionVube>().Createfraction();
-            }*/
+            }
             if (l_RayvastHit.collider.tag == "Portal" && l_RayvastHit.collider.GetComponent<Portal>() == FPSPlayerController.instance.m_BluePortal && Turret.instance.m_Laser.m_LineRenderer.gameObject.activeInHierarchy)
             {
                 FPSPlayerController.instance.m_OrangePortal.GetComponent<Portal>().Createfraction();

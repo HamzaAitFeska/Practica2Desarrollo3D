@@ -28,7 +28,6 @@ public class PlayerLife : MonoBehaviour
         instance = this;
         currentLife = maxLife;
         m_IsCreated = false;
-        //transform.rotation = CheckpointRotation;
         m_IsDead = false;
         m_PlayedOnce = false;
         GameOver.SetActive(false);
@@ -48,6 +47,7 @@ public class PlayerLife : MonoBehaviour
             FPSPlayerController.instance.m_characterController.enabled = false;
             UI.SetActive(false);
             m_IsDead = true;
+            FPSPlayerController.instance.ThrowAttachedObject(0.0f);
         }
 
               
@@ -65,7 +65,6 @@ public class PlayerLife : MonoBehaviour
     public void DamagePlayer()
     {
         currentLife--;
-        //AudioController.instance.PlayOneShot(AudioController.instance.playerHurt);
     }
 
     public void Death()
@@ -75,21 +74,21 @@ public class PlayerLife : MonoBehaviour
 
     private IEnumerator Respawn()
     {
-        yield return new WaitForSeconds(1f);
-        currentLife = maxLife;
         transform.position = CheckpointPosition;
         FPSPlayerController.instance.ProhibitedTexture.SetActive(false);
+        yield return new WaitForSeconds(0.25f);
+        GameOver.SetActive(false);
+        UI.SetActive(true);
         FPSPlayerController.instance.m_Shooting = false;
         FPSPlayerController.instance.m_Yaw = CheckPointYaw;
         FPSPlayerController.instance.m_Pitch = CheckpoinPitch;
         FPSPlayerController.instance.m_characterController.enabled = true;
         FPSPlayerController.instance.m_AngleLocked = false;
-        UI.SetActive(true);
-        GameOver.SetActive(false);
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         m_IsCreated = true;
         m_IsDead = false;
         m_PlayedOnce = false;
+        currentLife = maxLife;
     }
 }

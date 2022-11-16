@@ -220,7 +220,7 @@ public class FPSPlayerController : MonoBehaviour
 
         
 
-        if(Input.GetKeyDown(m_PickObject) && CanAttachObject())
+        if(Input.GetMouseButtonDown(0) && CanAttachObject())
         {
             AttachObject();  
         }
@@ -232,14 +232,16 @@ public class FPSPlayerController : MonoBehaviour
             UpdateAttachObject();
         }
 
-        if (m_ObjectAttached && !m_AttachingObject)
+        if (!m_AttachingObject && m_ObjectAttached)
         {
-            if (Input.GetKeyDown(m_ThrowObject))
+            if (Input.GetMouseButtonDown(0))
             {
+                m_Shooting = true;
                 ThrowAttachedObject(m_ThrowAttachedObjectForce);
             }
-            if (Input.GetKeyDown(m_PickObject) && !CanAttachObject())
+            if (Input.GetMouseButtonDown(1) && !CanAttachObject())
             {
+                m_Shooting = true;
                 ThrowAttachedObject(0.0f);
             }
 
@@ -341,7 +343,7 @@ public class FPSPlayerController : MonoBehaviour
 
         }
     }
-    void ThrowAttachedObject(float force)
+    public void ThrowAttachedObject(float force)
     {
         if(m_ObjectAttached != null && m_ObjectAttached.tag == "Turret")
         {
@@ -352,6 +354,7 @@ public class FPSPlayerController : MonoBehaviour
             m_ObjectAttached = null;
             AudioController.instance.PlayOneShot(AudioController.instance.dropObject);
             AudioController.instance.Stop(AudioController.instance.pickupObjectLoop);
+            StartCoroutine(EndShoot());
         }
 
         if (m_ObjectAttached != null && m_ObjectAttached.tag == "CompanionCube")
@@ -363,6 +366,7 @@ public class FPSPlayerController : MonoBehaviour
             m_ObjectAttached = null;
             AudioController.instance.PlayOneShot(AudioController.instance.dropObject);
             AudioController.instance.Stop(AudioController.instance.pickupObjectLoop);
+            StartCoroutine(EndShoot());
         }
 
         if (m_ObjectAttached != null && m_ObjectAttached.tag == "RefractionCube")
@@ -374,6 +378,7 @@ public class FPSPlayerController : MonoBehaviour
             m_ObjectAttached = null;
             AudioController.instance.PlayOneShot(AudioController.instance.dropObject);
             AudioController.instance.Stop(AudioController.instance.pickupObjectLoop);
+            StartCoroutine(EndShoot());
         }
 
     }
@@ -465,7 +470,7 @@ public class FPSPlayerController : MonoBehaviour
             {
               Teleport(l_Portal);
             }
-            Debug.Log("IN");
+            
         }
     }
 
