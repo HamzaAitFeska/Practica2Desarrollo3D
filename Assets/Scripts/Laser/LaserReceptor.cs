@@ -10,7 +10,7 @@ public class LaserReceptor : MonoBehaviour
 
     public AudioSource laserReceptorIdle;
 
-    bool laserReceptorIsActive = false;
+    public bool laserReceptorIsActive = false;
 
     public bool m_ReceptorIsActive;
 
@@ -50,5 +50,14 @@ public class LaserReceptor : MonoBehaviour
     void StopLaserReceptorActiveAnimation()
     {
         m_Animation.Stop(m_LaserReceptorActiveClip.name);
+    }
+
+    public void Createfraction()
+    {
+        if (m_ReceptorIsActive)
+        {
+            return;
+        }
+        m_ReceptorIsActive = true;
     }
 }

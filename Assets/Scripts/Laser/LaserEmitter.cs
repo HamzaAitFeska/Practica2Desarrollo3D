@@ -30,8 +30,9 @@ public class LaserEmitter : MonoBehaviour
             }
             if (l_RayvastHit.collider.tag == "LaserReceptor")
             {
-                l_RayvastHit.collider.GetComponent<LaserReceptor>().m_ReceptorIsActive = true;
+                l_RayvastHit.collider.GetComponent<LaserReceptor>().Createfraction();
             }
+            
         }
         m_LineRenderer.SetPosition(1, new Vector3(0, 0, l_laserDistance));
     }
