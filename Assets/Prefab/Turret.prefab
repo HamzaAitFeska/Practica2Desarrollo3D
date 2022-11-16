@@ -1910,7 +1910,7 @@ MonoBehaviour:
   m_LineRenderer: {fileID: 4157378155364320930}
   m_CollisionLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 895
   m_MaxDistance: 250
   m_Turret: {fileID: 4157378154523278634}
 --- !u!65 &4157378155364320928
@@ -1922,7 +1922,7 @@ BoxCollider:
   m_GameObject: {fileID: 4157378155364320932}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.36, y: 0.29, z: 69.17}
   m_Center: {x: 0, y: 0, z: 34.085}
@@ -4112,10 +4112,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2300002, guid: e974cdd27b308e14fadbc5fef531fbbc, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9159af56582aa484999b8a3167047df4, type: 2}
     - target: {fileID: 2300004, guid: e974cdd27b308e14fadbc5fef531fbbc, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 3c205bb0891977146aeb14e27af3284b, type: 2}
+      objectReference: {fileID: 2100000, guid: 4fbe6d892526a624e8481a8eddec4eab, type: 2}
+    - target: {fileID: 2300008, guid: e974cdd27b308e14fadbc5fef531fbbc, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8bfa69583e8d3124089e1c3817e914bb, type: 2}
+    - target: {fileID: 2300010, guid: e974cdd27b308e14fadbc5fef531fbbc, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ae0d2bc7e694f654db06be96043e5117, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e974cdd27b308e14fadbc5fef531fbbc, type: 3}
 --- !u!4 &4157378154978498093 stripped
