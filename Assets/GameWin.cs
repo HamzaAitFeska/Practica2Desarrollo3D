@@ -6,9 +6,11 @@ using UnityEngine.SceneManagement;
 public class GameWin : MonoBehaviour
 {
     // Start is called before the first frame update
+    public GameObject UIWIN;
+    public GameObject UI;
     void Start()
     {
-        
+        UIWIN.SetActive(false);
     }
 
     // Update is called once per frame
@@ -21,7 +23,14 @@ public class GameWin : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            TryAgain();
+            UIWIN.SetActive(true);
+            FPSPlayerController.instance.m_Shooting = true;
+            FPSPlayerController.instance.m_AngleLocked = true;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            FPSPlayerController.instance.m_characterController.enabled = false;
+            FPSPlayerController.instance.ThrowAttachedObject(0.0f);
+            UI.SetActive(false);
         }
     }
 
