@@ -55218,6 +55218,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1090717247}
     - target: {fileID: 2184905985369214331, guid: 126aa4b5831d3b84cae0574e86cc2228, type: 3}
+      propertyPath: blackout
+      value: 
+      objectReference: {fileID: 2100000, guid: 033e7abac6f95844486087aa944e13d1, type: 2}
+    - target: {fileID: 2184905985369214331, guid: 126aa4b5831d3b84cae0574e86cc2228, type: 3}
       propertyPath: m_IdleClip
       value: 
       objectReference: {fileID: 7400000, guid: 3a8270e3093d2b748a9409b0ab688af2, type: 2}
@@ -55363,15 +55367,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2184905985369214332, guid: 126aa4b5831d3b84cae0574e86cc2228, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.99
+      value: 5.45
       objectReference: {fileID: 0}
     - target: {fileID: 2184905985369214332, guid: 126aa4b5831d3b84cae0574e86cc2228, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 17.85
+      value: 0.43
       objectReference: {fileID: 0}
     - target: {fileID: 2184905985369214332, guid: 126aa4b5831d3b84cae0574e86cc2228, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -36.6
+      value: -33.72
       objectReference: {fileID: 0}
     - target: {fileID: 2184905985369214332, guid: 126aa4b5831d3b84cae0574e86cc2228, type: 3}
       propertyPath: m_LocalRotation.w
@@ -65539,6 +65543,34 @@ PrefabInstance:
     - target: {fileID: 6440291643099104397, guid: 2c26a8ee4a5178a459e18985ccf5c662, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6440291643589454106, guid: 2c26a8ee4a5178a459e18985ccf5c662, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6440291643589454106, guid: 2c26a8ee4a5178a459e18985ccf5c662, type: 3}
+      propertyPath: m_ClearFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6440291643589454106, guid: 2c26a8ee4a5178a459e18985ccf5c662, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0.745283
+      objectReference: {fileID: 0}
+    - target: {fileID: 6440291643589454106, guid: 2c26a8ee4a5178a459e18985ccf5c662, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0.40584534
+      objectReference: {fileID: 0}
+    - target: {fileID: 6440291643589454106, guid: 2c26a8ee4a5178a459e18985ccf5c662, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0.2137415
+      objectReference: {fileID: 0}
+    - target: {fileID: 6440291644198245981, guid: 2c26a8ee4a5178a459e18985ccf5c662, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6440291644198245981, guid: 2c26a8ee4a5178a459e18985ccf5c662, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8395370470585842588, guid: 2c26a8ee4a5178a459e18985ccf5c662, type: 3}
       propertyPath: Loop

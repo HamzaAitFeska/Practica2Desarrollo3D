@@ -277,10 +277,22 @@ public class FPSPlayerController : MonoBehaviour
         if(m_BluePortal.gameObject.activeInHierarchy && m_OrangePortal.gameObject.activeInHierarchy)
         {
             m_CanPassPortal = true;
+            m_OrangePortal.m_Camera.gameObject.SetActive(true);
+            m_BluePortal.m_Camera.gameObject.SetActive(true);
         }
         else
         {
             m_CanPassPortal = false;
+        }
+
+        if(m_BluePortal.gameObject.activeInHierarchy && !m_OrangePortal.gameObject.activeInHierarchy)
+        {
+            m_OrangePortal.m_Camera.gameObject.SetActive(false);
+        }
+
+        if (!m_BluePortal.gameObject.activeInHierarchy && m_OrangePortal.gameObject.activeInHierarchy)
+        {
+            m_BluePortal.m_Camera.gameObject.SetActive(false);
         }
     }
 
